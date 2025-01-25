@@ -98,21 +98,44 @@ class EventList:
         event in the game.
         """
         # Hint: You should update the previous node's <next_command> as needed
+        curr = self.first
 
-        # TODO: Your code below
+        if curr is None:
+            self.first = event
+
+        while curr is not None:
+            curr = curr.next
+
+        curr.next_commant = command
+        curr.next = event
 
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
         If the list is empty, do nothing."""
 
         # Hint: The <next_command> and <next> attributes for the new last event should be updated as needed
+        curr = self.first
 
-        # TODO: Your code below
+        if curr is None:
+            return
+
+        while curr is not None:
+            curr = curr.next
+
+        curr = curr.next
+        # what does is mean that we have to update <next_command> and <next>
 
     def get_id_log(self) -> list[int]:
         """Return a list of all location IDs visited for each event in this list, in sequence."""
 
-        # TODO: Your code below
+        items_so_far = []
+        curr = self.first
+
+        while curr is not None:
+            items_so_far.append(curr.id_num)
+            curr = curr.next
+
+        return items_so_far
 
     # Note: You may add other methods to this class as needed but DO NOT CHANGE THE SPECIFICATION OF ANY OF THE ABOVE
 
