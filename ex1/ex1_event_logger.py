@@ -66,6 +66,8 @@ class EventList:
 
     Representation Invariants:
         - # TODO add any appropriate representation invariants, if needed
+        - (cannot be empty)!!!!
+        - (last.next must be None)!!!
     """
     first: Optional[Event]
     last: Optional[Event]
@@ -88,7 +90,7 @@ class EventList:
     def is_empty(self) -> bool:
         """Return whether this event list is empty."""
 
-        # TODO: Your code below
+        return self.first is None
 
     def add_event(self, event: Event, command: Optional[str] = None) -> None:
         """Add the given new event to the end of this event list.
