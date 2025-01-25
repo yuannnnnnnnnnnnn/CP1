@@ -85,8 +85,6 @@ class EventList:
             print(f"Location: {curr.id_num}, Command: {curr.next_command}")
             curr = curr.next
 
-    # TODO: Complete the methods below, based on the given descriptions. Do NOT change any of their specification.
-    #  That is, the function headers (parameters, return type, etc.) must NOT be changed.
     def is_empty(self) -> bool:
         """Return whether this event list is empty."""
 
@@ -137,7 +135,7 @@ class EventList:
 
         return items_so_far
 
-    # Note: You may add other methods to this class as needed but DO NOT CHANGE THE SPECIFICATION OF ANY OF THE ABOVE
+    # Note: You may add other methods to this class as needed but DO NOT CHANGE THE SPECIFICATION ANY OF THE ABOVE
 
 
 if __name__ == "__main__":
@@ -145,8 +143,8 @@ if __name__ == "__main__":
     # When you are ready to check your work with python_ta, uncomment the following lines.
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
-    # import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 120,
-    #     'disable': ['R1705', 'E9998', 'E9999']
-    # })
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 120,
+        'disable': ['R1705', 'E9998', 'E9999']
+    })
