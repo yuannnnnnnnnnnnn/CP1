@@ -6,7 +6,7 @@
       "brief_description": "You are in the library.",
       "long_description": "You are in the library where you fell asleep last night, studying for an important exam. You wake up and look around. No one else seems to be here but you.",
       "available_commands": {
-        "go south": 5,
+        "go south": 6,
         "go east": 2
       }
     },
