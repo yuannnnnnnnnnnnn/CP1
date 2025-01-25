@@ -49,7 +49,11 @@ class Event:
     # set of attributes, you can do that separately in the project1 folder. This class is part of
     # Exercise 1 and will be auto-graded.
 
-    # TODO: Add attributes below based on the provided descriptions above. Use the specified datatypes.
+    id_num: int
+    description: str
+    next_command: Optional[str] = None
+    next: Optional[Event] = None
+    prev: Optional[Event] = None
 
 
 class EventList:
@@ -57,7 +61,8 @@ class EventList:
     A linked list of game events.
 
     Instance Attributes:
-        - # TODO add descriptions of instance attributes here
+        - first: Event object representing the first event that the user encounters
+        - last: Event object representing the last event that the user encounters
 
     Representation Invariants:
         - # TODO add any appropriate representation invariants, if needed
