@@ -95,9 +95,11 @@ class SimpleAdventureGame:
         """Return Location object associated with the provided location ID.
         If no ID is provided, return the Location object associated with the current location.
         """
+        if loc_id is None:
+            return self._locations[self.current_location_id]
 
-        return self.get_location(loc_id)
-
+        return self._locations.get(loc_id, self._locations[self.current_location_id])
+    # lines 98 - 101 were provided by ChatGPT
 
 
 class AdventureGameSimulation:
