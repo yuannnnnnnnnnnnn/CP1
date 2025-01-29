@@ -122,6 +122,7 @@ class AdventureGameSimulation:
         self._game = SimpleAdventureGame(game_data_file, initial_location_id)
 
         # TODO: Add first event (initial location, no previous command)
+        self._first_event = self._game.get_location()
         # Hint: self._game.get_location() gives you back the current location
 
         # TODO: Generate the remaining events based on the commands and initial location
