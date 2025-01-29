@@ -66,8 +66,8 @@ class EventList:
 
     Representation Invariants:
         - # TODO add any appropriate representation invariants, if needed
-        - (cannot be empty)!!!!
-        - (last.next must be None)!!!
+        - (cannot be empty)
+        - last.next is None
     """
     first: Optional[Event]
     last: Optional[Event]
