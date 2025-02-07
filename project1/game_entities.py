@@ -26,10 +26,16 @@ class Location:
     """A location in our text adventure game world.
 
     Instance Attributes:
-        - # TODO Describe each instance attribute here
+        - id: the id number of the location
+        - name: the name of the location
+        - brief_description: brief description
+        - long_description: full description of the location
+        - available_commands:
 
     Representation Invariants:
-        - # TODO Describe any necessary representation invariants
+        - self.id
+        - self.name != []
+        -
     """
 
     # This is just a suggested starter class for Location.
