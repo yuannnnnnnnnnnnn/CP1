@@ -28,7 +28,8 @@
       "long_description": "You are currently standing in the New College Dining Hall. You realize they are serving ramen today (your favourite). Suddenly your stomach growls… should you buy the ramen…",
       "available_commands": {
         "go north": 10,
-        "go east": 30
+        "go east": 30,
+        "go south":
       },
       "items": ["Ramen"]
     },
@@ -74,6 +75,17 @@
         "go west": 50
       },
       "items": ["Lucky Mug"]
+    },
+    {
+      "id": 70,
+      "name": "McLennan Physical Loboratory",
+      "brief_description": "",
+      "long_description": "Breaking out in a sweat, you are standing in front of your friend's apartment. You ask her if you possibly left something important at their place… she scurries into her kitchen and hands you something… do you take it?",
+      "available_commands": {
+        "go north": 20,
+        "go east": 40
+      },
+      "items": ["Lucky Mug"]
     }
   ],
   "items": [
@@ -83,6 +95,48 @@
       "start_position": 1,
       "target_position": 4,
       "target_points": 5
+    },
+    {
+      "name": "Ramen",
+      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "start_position": 20,
+      "target_position": 50,
+      "target_points": 10
+    },
+    {
+      "name": "USB Drive",
+      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "start_position": 50,
+      "target_position": 4,
+      "target_points": 50
+    },
+    {
+      "name": "Lucky Mug",
+      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "start_position": 50,
+      "target_position": 4,
+      "target_points": 50
+    },
+    {
+      "name": "Lipgloss",
+      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "start_position": 50,
+      "target_position": 4,
+      "target_points": 50
+    },
+    {
+      "name": "Laptop Charger",
+      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "start_position": 50,
+      "target_position": 4,
+      "target_points": 50
+    },
+    {
+      "name": "Bubble Tea",
+      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "start_position": 30,
+      "target_position": 4,
+      "target_points": 50
     }
   ]
 }
