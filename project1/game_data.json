@@ -2,7 +2,7 @@
   "locations": [
     {
       "id": 1,
-      "name": "Bahen 1F",
+      "name": "Bahen Center",
       "brief_description": "You are on the first floor of the Bahen Center. There are elevators to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
       "long_description": "You are on the first floor of the Bahen Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
       "available_commands": {
@@ -10,6 +10,70 @@
         "go east": 2
       },
       "items": ["toonie"]
+    },
+    {
+      "id": 10,
+      "name": "Robart Commons",
+      "brief_description": "",
+      "long_description": "You find yourself back at Robart’s Commons–where you spent the whole night last night–and ah ha! You spot a small black usb exactly where you sat last night. Should you pick it up?",
+      "available_commands": {
+        "go south": 20
+      },
+      "items": ["USB Drive"]
+    },
+    {
+      "id": 20,
+      "name": "New College Dining Hall",
+      "brief_description": "",
+      "long_description": "You are currently standing in the New College Dining Hall. You realize they are serving ramen today (your favourite). Suddenly your stomach growls… should you buy the ramen…",
+      "available_commands": {
+        "go north": 10,
+        "go east": 30
+      },
+      "items": ["Ramen"]
+    },
+    {
+      "id": 30,
+      "name": "KungFu Tea",
+      "brief_description": "",
+      "long_description": "You have arrived at the infamous KungFu Tea! You are debating buying a boba…",
+      "available_commands": {
+        "go south": 40,
+        "go east": 50,
+        "go west": 20
+      },
+      "items": ["Bubble Tea"]
+    },
+    {
+      "id": 40,
+      "name": "UofT Bookstore",
+      "brief_description": "",
+      "long_description": "You wandered inside the UofT Bookstore and spot the Sephora Vending Machine… something immediately catches your eye… your favourite lipgloss (which you just so happen ran out of)... how can you go about your day with dry lips! Do you buy the lipgloss?",
+      "available_commands": {
+        "go north": 30
+      },
+      "items": ["Lipgloss"]
+    },
+    {
+      "id": 50,
+      "name": "Morrison Hall",
+      "brief_description": "",
+      "long_description": "You are in your dorm room at morrison hall. You swear on your life that your laptop charger is somewhere in this room… just somewhere you haven’t checked– in a tiny shoebox room. Do you want to check around?",
+      "available_commands": {
+        "go east": 60,
+        "go west": 30
+      },
+      "items": ["Laptop Charger"]
+    },
+    {
+      "id": 60,
+      "name": "Friend's Apartment",
+      "brief_description": "",
+      "long_description": "Breaking out in a sweat, you are standing in front of your friend's apartment. You ask her if you possibly left something important at their place… she scurries into her kitchen and hands you something… do you take it?",
+      "available_commands": {
+        "go west": 50
+      },
+      "items": ["Lucky Mug"]
     }
   ],
   "items": [
