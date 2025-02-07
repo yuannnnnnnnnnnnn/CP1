@@ -1,17 +1,6 @@
 {
   "locations": [
     {
-      "id": 1,
-      "name": "Bahen Center",
-      "brief_description": "You are on the first floor of the Bahen Center. There are elevators to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are on the first floor of the Bahen Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
-      "available_commands": {
-        "go south": 4,
-        "go east": 2
-      },
-      "items": ["toonie"]
-    },
-    {
       "id": 10,
       "name": "Robart Commons",
       "brief_description": "",
@@ -59,12 +48,12 @@
       "id": 50,
       "name": "Morrison Hall",
       "brief_description": "",
-      "long_description": "You are in your dorm room at morrison hall. You swear on your life that your laptop charger is somewhere in this room… just somewhere you haven’t checked– in a tiny shoebox room. Do you want to check around?",
+      "long_description": "You are in your dorm room at morrison hall. Such a cozy little shoebox",
       "available_commands": {
         "go east": 60,
         "go west": 30
       },
-      "items": ["Laptop Charger"]
+      "items": [""]
     },
     {
       "id": 60,
@@ -80,60 +69,53 @@
       "id": 70,
       "name": "McLennan Physical Loboratory",
       "brief_description": "",
-      "long_description": "Breaking out in a sweat, you are standing in front of your friend's apartment. You ask her if you possibly left something important at their place… she scurries into her kitchen and hands you something… do you take it?",
+      "long_description": "You are in the doorway of room 203 of McLennan Physical Laboratory (your favourite spot on campus). You had your MAT137 lecture here yesterday and you think that there is a possibility that you left your laptop charger here. Do you want to check around",
       "available_commands": {
         "go north": 20,
         "go east": 40
       },
-      "items": ["Lucky Mug"]
+      "items": ["Laptop Charger"]
     }
   ],
   "items": [
     {
-      "name": "toonie",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
-      "start_position": 1,
-      "target_position": 4,
-      "target_points": 5
-    },
-    {
       "name": "Ramen",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "description": "You just bought a hot tonkatsu ramen. It looks delicious. You quickly gobble it down, but soon regret it as your stomach starts to hurt",
       "start_position": 20,
       "target_position": 50,
       "target_points": 10
     },
     {
       "name": "USB Drive",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "description": "ALAS! It's the USB drive storing your project. You and your partner can now relax... a bit ",
       "start_position": 50,
       "target_position": 4,
       "target_points": 50
     },
     {
       "name": "Lucky Mug",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "description": "OMG! It's my lucky mug. I'm so glad, I was so worried that I had submit my project without it.",
       "start_position": 50,
       "target_position": 4,
       "target_points": 50
     },
     {
       "name": "Lipgloss",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "description": "Great! A restock of my lipgloss, my lips will be so hydrated.",
       "start_position": 50,
       "target_position": 4,
       "target_points": 50
     },
     {
       "name": "Laptop Charger",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
-      "start_position": 50,
+      "description": "Just as I thought, I left my laptop charger plugged in here. I can finally charge my laptop.",
+      "start_position": 70,
       "target_position": 4,
       "target_points": 50
     },
     {
       "name": "Bubble Tea",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "description": "Yum! Who doesn't love bubble tea, now I will be caffeinated and awake.",
       "start_position": 30,
       "target_position": 4,
       "target_points": 50
