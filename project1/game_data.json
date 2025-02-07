@@ -18,7 +18,7 @@
       "available_commands": {
         "go north": 10,
         "go east": 30,
-        "go south":
+        "go south": 70
       },
       "items": ["Ramen"]
     },
