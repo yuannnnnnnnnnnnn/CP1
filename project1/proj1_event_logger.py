@@ -48,7 +48,11 @@ class Event:
     # If you want to create a special type of Event for your game that requires a different
     # set of attributes, you can create new classes using inheritance, as well.
 
-    # TODO: Add attributes below based on the provided descriptions above.
+    id_num: int
+    description: str
+    next_command: str
+    next: Optional[Event] = None
+    prev: Optional[Event] = None
 
 
 class EventList:
@@ -56,7 +60,8 @@ class EventList:
     A linked list of game events.
 
     Instance Attributes:
-        - # TODO add descriptions of instance attributes here
+        - first: Event Object Representing the first event in EventList
+        - last: Even Object Representing the last event in EventList
 
     Representation Invariants:
         - # TODO add any appropriate representation invariants, if needed
