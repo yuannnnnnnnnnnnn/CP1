@@ -161,7 +161,7 @@ if __name__ == "__main__":
             if choice == "log":
                 game_log.display_events()
             elif choice == "look":
-                game_log.
+                game_log. # do something here
             elif choice == "inventory":
                 game_log.
             elif choice == "score":
