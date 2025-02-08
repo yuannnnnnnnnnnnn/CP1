@@ -24,6 +24,7 @@ from __future__ import annotations
 from proj1_event_logger import Event, EventList
 from adventure import AdventureGame
 from game_entities import Location
+import proj1_event_logger
 
 
 class AdventureGameSimulation:
