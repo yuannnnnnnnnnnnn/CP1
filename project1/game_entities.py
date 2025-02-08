@@ -37,6 +37,11 @@ class Location:
         - self.name != []
         -
     """
+    id: int
+    name: str
+    brief_description: str
+    long_description: str
+    available_commands: str
 
     # This is just a suggested starter class for Location.
     # You may change/add parameters and the data available for each Location object as you see fit.
