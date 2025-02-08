@@ -62,7 +62,6 @@ class AdventureGame:
         Preconditions:
         - game_data_file is the filename of a valid game data JSON file
         """
-
         # NOTES:
         # You may add parameters/attributes/methods to this class as you see fit.
 
@@ -105,7 +104,15 @@ class AdventureGame:
 
         # TODO: Complete this method as specified
         # YOUR CODE BELOW
+        location =
+        if loc_id is None;
+            return location
 
+    def pick_item():
+        """ ..."""
+
+    def buy_item():
+        """..."""
 
 if __name__ == "__main__":
 
@@ -144,6 +151,7 @@ if __name__ == "__main__":
         # TODO: Depending on whether or not it's been visited before,
         #  print either full description (first time visit) or brief description (every subsequent visit) of location
         # YOUR CODE HERE
+
 
         # Display possible actions at this location
         print("What to do? Choose from: look, inventory, score, undo, log, quit")

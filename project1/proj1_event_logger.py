@@ -25,8 +25,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-# TODO: Copy/paste your ex1_event_logger code below, and modify it if needed to fit your game
-
 
 @dataclass
 class Event:
@@ -63,8 +61,9 @@ class EventList:
         - last: Even Object Representing the last event in EventList
 
     Representation Invariants:
-        - # TODO add any appropriate representation invariants, if needed
+        - self.first == self.last
     """
+    # idk is representation invariants are right... must change later meow
     first: Optional[Event]
     last: Optional[Event]
 
