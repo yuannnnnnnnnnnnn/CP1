@@ -50,7 +50,7 @@ class AdventureGameSimulation:
         # Hint: self._game.get_location() gives you back the current location
 
         initial_location = self._game.get_location()  # gives back the current location
-        initial_event = Event(id_num=initial_location.id_num, description=initial_location.description,
+        initial_event = Event(id_num=initial_location.id_num, description=initial_location.brief_description,
                               next_command=None, next=None, prev=None)
         self._events.add_event(initial_event)
         # lines 125 - 128 were provided by ChatGPT
