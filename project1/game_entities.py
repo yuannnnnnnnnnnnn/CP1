@@ -41,7 +41,7 @@ class Location:
     name: str
     brief_description: str
     long_description: str
-    available_commands: str
+    available_commands: dict[str, int]
 
     # This is just a suggested starter class for Location.
     # You may change/add parameters and the data available for each Location object as you see fit.
