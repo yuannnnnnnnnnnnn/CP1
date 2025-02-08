@@ -131,9 +131,14 @@ if __name__ == "__main__":
         location = game.get_location()
 
         # TODO: Add new Event to game log to represent current game location
-        initial_location = Event(id_num=50, description="Morrison Hall", next_command)
-        EventList()
-        #  Note that the <choice> variable should be the command which led to this event
+        if game_log.first is None:
+            choice = None
+        else:
+            choice = game_log.last.next_command
+
+        new_event = Event(id_num=location.id_num, description=location.brief_description, next_command=choice,
+                next=None,prev=None)
+            #  Note that the <choice> variable should be the command which led to this event
         # YOUR CODE HERE
 
         # TODO: Depending on whether or not it's been visited before,
@@ -161,7 +166,8 @@ if __name__ == "__main__":
             if choice == "log":
                 game_log.display_events()
             elif choice == "look":
-                game_log. # do something here appear something here
+                current_location = game.get_location()  # Get the current location
+                print(current_location.long_description)
             elif choice == "inventory":
                 game_log.
             elif choice == "score":
