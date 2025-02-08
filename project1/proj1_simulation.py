@@ -24,7 +24,6 @@ from __future__ import annotations
 from proj1_event_logger import Event, EventList
 from adventure import AdventureGame
 from game_entities import Location
-import proj1_event_logger
 
 
 class AdventureGameSimulation:
@@ -72,6 +71,33 @@ class AdventureGameSimulation:
 
         # TODO: Complete this method as specified. For each command, generate the event and add
         #  it to self._events.
+        previous_event = None
+
+        for command in commands:
+            # Check if the command is valid at the current location
+            if command in current_location.available_commands:
+                next_location_id = current_location.available_commands[command]
+                next_location = self._game.get_location(next_location_id)  # Get the new location
+
+                # Create a new event for this move
+                new_event = Event(id_num=next_location.id_num, description=next_location.brief_description,
+                                  next_command=command, next=None, prev=previous_event)
+
+                # If there is a previous event, link it to the current event
+                if previous_event is not None:
+                    previous_event.next = new_event
+                    previous_event.next_command = command  # Update the `next_command` for the previous event
+
+                # If this is the first event (no previous event), set it as the first event in the list
+                if self._events.is_empty():
+                    self._events.first = new_event
+
+                # Add new event to the event list
+                self._events.add_event(new_event)
+
+                # Update the previous event to the current one for linking in the next iteration
+                previous_event = new_event
+                current_location = next_location
         # Hint: current_location.available_commands[command] will return the next location ID
         # which executing <command> while in <current_location_id> leads to
 
@@ -88,9 +114,7 @@ class AdventureGameSimulation:
         >>> sim.get_id_log()
         [1, 2, 3, 3]
         """
-
         # Note: We have completed this method for you. Do NOT modify it for ex1.
-
         return self._events.get_id_log()
 
     def run(self) -> None:
