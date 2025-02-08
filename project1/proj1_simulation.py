@@ -49,6 +49,7 @@ class AdventureGameSimulation:
 
         # TODO: Add first event (initial location, no previous command)
         # Hint: self._game.get_location() gives you back the current location
+
         initial_location = self._game.get_location()  # gives back the current location
         initial_event = Event(id_num=initial_location.id_num, description=initial_location.description,
                               next_command=None, next=None, prev=None)
@@ -56,6 +57,7 @@ class AdventureGameSimulation:
         # lines 125 - 128 were provided by ChatGPT
 
         self.generate_events(commands, initial_location)
+
         # line 132 was provided by ChatGPT
         # TODO: Generate the remaining events based on the commands and initial location
         # Hint: Call self.generate_events with the appropriate arguments

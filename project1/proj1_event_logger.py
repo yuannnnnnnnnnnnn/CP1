@@ -49,7 +49,7 @@ class Event:
 
     id_num: int
     description: str
-    next_command: str
+    next_command: Optional[str] = None
     next: Optional[Event] = None
     prev: Optional[Event] = None
 
