@@ -85,7 +85,6 @@ class EventList:
     def is_empty(self) -> bool:
         """Return whether this event list is empty."""
         return self.first is None
-        return self.first is None
 
     def add_event(self, event: Event, command: str = None) -> None:
         """Add the given new event to the end of this event list.
