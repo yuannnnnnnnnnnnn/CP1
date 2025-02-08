@@ -131,6 +131,8 @@ if __name__ == "__main__":
         location = game.get_location()
 
         # TODO: Add new Event to game log to represent current game location
+        initial_location = Event(id_num=50, description="Morrison Hall", next_command)
+        EventList()
         #  Note that the <choice> variable should be the command which led to this event
         # YOUR CODE HERE
 
@@ -158,12 +160,23 @@ if __name__ == "__main__":
             # Note: For the "undo" command, remember to manipulate the game_log event list to keep it up-to-date
             if choice == "log":
                 game_log.display_events()
+            elif choice == "look":
+                game_log.
+            elif choice == "inventory":
+                game_log.
+            elif choice == "score":
+                game_log.
+            elif choice == "undo":
+                game_log.
+            elif choice == "quit":
+                game_log.
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
-
         else:
             # Handle non-menu actions
             result = location.available_commands[choice]
             game.current_location_id = result
 
             # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
+
+        if
             # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
