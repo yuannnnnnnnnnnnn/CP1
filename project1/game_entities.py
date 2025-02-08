@@ -28,9 +28,9 @@ class Location:
     Instance Attributes:
         - id: the id number of the location
         - name: the name of the location
-        - brief_description: brief description
+        - brief_description: brief description of location
         - long_description: full description of the location
-        - available_commands:
+        - available_commands: Commands that can be executed at the location
 
     Representation Invariants:
         - self.id
@@ -64,10 +64,16 @@ class Item:
     """An item in our text adventure game world.
 
     Instance Attributes:
-        - # TODO Describe each instance attribute here
+        - name: the name of item
+        - description: description of action when item is aquired
+        - start_position: where the item is found
+        - target_position: where the item must be deposited
+        - target_points: the amount of points gained when item is aquired
 
     Representation Invariants:
-        - # TODO Describe any necessary representation invariants
+        - name != ''
+        - brief_description != ''
+        - long_description != ''
     """
 
     # NOTES:
