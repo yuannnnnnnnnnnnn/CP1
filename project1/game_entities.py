@@ -31,6 +31,7 @@ class Location:
         - brief_description: brief description of location
         - long_description: full description of the location
         - available_commands: Commands that can be executed at the location
+        - available_actions: Actions that you can do when enter a location
 
     Representation Invariants:
         - self.id
@@ -42,6 +43,7 @@ class Location:
     brief_description: str
     long_description: str
     available_commands: dict[str, int]
+    available_actions: dict[str, bool]
 
     # This is just a suggested starter class for Location.
     # You may change/add parameters and the data available for each Location object as you see fit.
@@ -50,7 +52,7 @@ class Location:
     # All locations in your game MUST be represented as an instance of this class.
 
     def __init__(self, location_id, brief_description, long_description, available_commands, items,
-                 visited=False) -> None:
+                 visited=False, available_actions=None) -> None:
         """Initialize a new location.
 
         # TODO Add more details here about the initialization if needed
@@ -62,6 +64,7 @@ class Location:
         self.available_commands = available_commands
         self.items = items
         self.visited = visited
+        self.available_actions = available_actions
 
 
 @dataclass

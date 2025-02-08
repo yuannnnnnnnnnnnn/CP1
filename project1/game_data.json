@@ -8,6 +8,10 @@
       "available_commands": {
         "go south": 20
       },
+      "available_actions": {
+        "pick up": True,
+        "no": False
+      },
       "items": ["USB Drive"]
     },
     {
@@ -19,6 +23,10 @@
         "go north": 10,
         "go east": 30,
         "go south": 70
+      },
+      "available_actions": {
+        "buy": True,
+        "no": False
       },
       "items": ["Ramen"]
     },
@@ -32,6 +40,10 @@
         "go east": 50,
         "go west": 20
       },
+      "available_actions": {
+        "pick up": True,
+        "no": False
+      },
       "items": ["Bubble Tea"]
     },
     {
@@ -41,6 +53,10 @@
       "long_description": "You wandered inside the UofT Bookstore and spot the Sephora Vending Machine… something immediately catches your eye… your favourite lipgloss (which you just so happen ran out of)... how can you go about your day with dry lips! Do you buy the lipgloss?",
       "available_commands": {
         "go north": 30
+      },
+      "available_actions": {
+        "buy": True,
+        "no": False
       },
       "items": ["Lipgloss"]
     },
@@ -62,6 +78,10 @@
       "long_description": "Breaking out in a sweat, you are standing in front of your friend's apartment. You ask her if you possibly left something important at their place… she scurries into her kitchen and hands you something… do you take it?",
       "available_commands": {
         "go west": 50
+      },
+      "available_actions": {
+        "take": True,
+        "no": False
       },
       "items": ["Lucky Mug"]
     },

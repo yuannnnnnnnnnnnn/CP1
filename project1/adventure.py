@@ -71,10 +71,12 @@ class AdventureGame:
 
         # Suggested helper method (you can remove and load these differently if you wish to do so):
         self._locations, self._items = self._load_game_data(game_data_file)
+        # self._items = []  # eh i don't know if this is right but i made the change
 
         # Suggested attributes (you can remove and track these differently if you wish to do so):
         self.current_location_id = initial_location_id  # game begins at this location
         self.ongoing = True  # whether the game is ongoing
+        self.inventory = []
 
     @staticmethod
     def _load_game_data(filename: str) -> tuple[dict[int, Location], list[Item]]:
@@ -104,15 +106,38 @@ class AdventureGame:
 
         # TODO: Complete this method as specified
         # YOUR CODE BELOW
-        location =
-        if loc_id is None;
-            return location
+        if loc_id is None:
+            return self._locations[self.current_location_id]
+        else:
+            return self._locations[loc_id]
 
-    def pick_item():
-        """ ..."""
+    def show_inventory(self):
+        print("Your Inventory:" + item.name for item in self.inventory)
 
-    def buy_item():
-        """..."""
+    def pick_item(self, item_name: str):
+        """Pick up the item and add it to the inventory."""
+        # Check if the 'pick up' action is available at the current location
+        current_location = self.get_location(self.current_location_id)
+
+        if "pick up" in current_location.available_actions and current_location.available_actions["pick up"]:
+            # Add the item to the inventory
+            self.inventory.append(item_name)  # Add the item to the inventory
+            print(f"You picked up {item_name}. It has been added to your inventory.")
+        else:
+            print(f"Picking up {item_name} is not an available action at this location.")
+
+    def buy_item(self, item_name: str):
+        """Handle the purchase of an item if the 'buy' action is available."""
+    # Check if the 'buy' action is available at the current location
+        current_location = self.get_location(self.current_location_id)
+
+        if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
+        # Add the item to the inventory
+            self.inventory.append(item_name)  # Add the item to the inventory
+            print(f"You bought {item_name}. It has been added to your inventory.")
+        else:
+            print(f"Buying {item_name} is not an available action at this location.")
+
 
 if __name__ == "__main__":
 
@@ -177,7 +202,7 @@ if __name__ == "__main__":
                 current_location = game.get_location()  # Get the current location
                 print(current_location.long_description)
             elif choice == "inventory":
-                game_log.
+                game_log.show_inventory()
             elif choice == "score":
                 game_log.
             elif choice == "undo":
