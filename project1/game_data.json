@@ -89,35 +89,35 @@
       "name": "USB Drive",
       "description": "ALAS! It's the USB drive storing your project. You and your partner can now relax... a bit ",
       "start_position": 50,
-      "target_position": 4,
+      "target_position": 50,
       "target_points": 50
     },
     {
       "name": "Lucky Mug",
       "description": "OMG! It's my lucky mug. I'm so glad, I was so worried that I had submit my project without it.",
       "start_position": 50,
-      "target_position": 4,
+      "target_position": 50,
       "target_points": 75
     },
     {
       "name": "Lipgloss",
       "description": "Great! A restock of my lipgloss, my lips will be so hydrated.",
       "start_position": 50,
-      "target_position": 4,
+      "target_position": 50,
       "target_points": 20
     },
     {
       "name": "Laptop Charger",
       "description": "Just as I thought, I left my laptop charger plugged in here. I can finally charge my laptop.",
       "start_position": 70,
-      "target_position": 4,
+      "target_position": 50,
       "target_points": 50
     },
     {
       "name": "Bubble Tea",
       "description": "Yum! Who doesn't love bubble tea, now I will be caffeinated and awake.",
       "start_position": 30,
-      "target_position": 4,
+      "target_position": 50,
       "target_points": 10
     }
   ]
