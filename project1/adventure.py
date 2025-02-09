@@ -98,8 +98,7 @@ class AdventureGame:
             locations[loc_data['id']] = location_obj
 
         items = []
-        for item_data in data['items']:  # Assuming there's an 'items' key in the JSON file
-            # Here we assume 'items' contain dictionaries with the necessary attributes
+        for item_data in data['items']:
             item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'],
                             item_data['target_position'], item_data['target_points'])
             items.append(item_obj)
@@ -172,7 +171,7 @@ if __name__ == "__main__":
     # })
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
-    game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
+    game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
 
@@ -204,6 +203,9 @@ if __name__ == "__main__":
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
+        # print("And... ")
+        # for move in location.available_actions:
+        #     print("-", move)
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()

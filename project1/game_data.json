@@ -69,6 +69,10 @@
         "go east": 60,
         "go west": 30
       },
+      "available_actions": {
+        "drop": true,
+        "no": false
+      },
       "items": [""]
     },
     {
@@ -93,6 +97,10 @@
       "available_commands": {
         "go north": 20,
         "go east": 40
+      },
+      "available_actions": {
+        "check": true,
+        "no": false
       },
       "items": ["Laptop Charger"]
     }
