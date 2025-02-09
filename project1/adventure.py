@@ -209,9 +209,8 @@ if __name__ == "__main__":
         for action in location.available_commands:
             print("-", action)
         print("And you can also:")
-        for action, available in location.available_actions.items():
-            if available:
-                print(f"- {action}")
+        for moves in location.available_actions:
+            print("-", moves)
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()

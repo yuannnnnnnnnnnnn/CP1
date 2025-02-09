@@ -64,7 +64,7 @@ class Location:
         self.available_commands = available_commands
         self.items = items
         self.visited = visited
-        self.available_actions = available_actions
+        self.available_actions = available_actions if available_actions is not None else {}
 
 
 @dataclass
