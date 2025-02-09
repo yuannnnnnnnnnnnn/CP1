@@ -8,7 +8,7 @@ pygame.init()
 def solve_puzzle():
     """..."""
     # Set up the game window
-    screen = pygame.display.set_mode((400, 300))
+    screen = pygame.display.set_mode((1000, 800))
     pygame.display.set_caption("Ramen Puzzle")
 
     font = pygame.font.SysFont(None, 40)
@@ -19,8 +19,14 @@ def solve_puzzle():
     num2 = random.randint(1, 10)
     correct_answer = num1 + num2
 
+    long_text = """The cook is putting together your ramen–you’re basically salivating–but right
+    before he was about to hand you your bowl, he handed you a sheet of paper with what
+    seems to be random letters put together. He strikes up an offer:
+    If you can unscramble the word written on this paper, you can get this bowl of ramen for
+    free. HOLY MOLY! How can you pass up on this offer?"""
+
     # Display question
-    question_text = font.render(f"What is {num1} + {num2}?", True, (255, 255, 255))
+    question_text = font.render(long_text, True, (255, 255, 255))
     answer_box = pygame.Rect(150, 200, 100, 50)
     answer_input = ""
 
