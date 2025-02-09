@@ -9,8 +9,8 @@
         "go south": 20
       },
       "available_actions": {
-        "pick up": True,
-        "no": False
+        "pick up": true,
+        "no": false
       },
       "items": ["USB Drive"]
     },
@@ -25,8 +25,8 @@
         "go south": 70
       },
       "available_actions": {
-        "buy": True,
-        "no": False
+        "buy": true,
+        "no": false
       },
       "items": ["Ramen"]
     },
@@ -41,8 +41,8 @@
         "go west": 20
       },
       "available_actions": {
-        "pick up": True,
-        "no": False
+        "pick up": true,
+        "no": false
       },
       "items": ["Bubble Tea"]
     },
@@ -55,8 +55,8 @@
         "go north": 30
       },
       "available_actions": {
-        "buy": True,
-        "no": False
+        "buy": true,
+        "no": false
       },
       "items": ["Lipgloss"]
     },
@@ -80,8 +80,8 @@
         "go west": 50
       },
       "available_actions": {
-        "take": True,
-        "no": False
+        "take": true,
+        "no": false
       },
       "items": ["Lucky Mug"]
     },

@@ -52,6 +52,8 @@ class AdventureGame:
     _items: list[Item]
     current_location_id: int  # Suggested attribute, can be removed
     ongoing: bool  # Suggested attribute, can be removed
+    inventory: list[Item]
+    score: int
 
     def __init__(self, game_data_file: str, initial_location_id: int) -> None:
         """
@@ -77,6 +79,7 @@ class AdventureGame:
         self.current_location_id = initial_location_id  # game begins at this location
         self.ongoing = True  # whether the game is ongoing
         self.inventory = []
+        self.score = 0
 
     @staticmethod
     def _load_game_data(filename: str) -> tuple[dict[int, Location], list[Item]]:
@@ -90,10 +93,16 @@ class AdventureGame:
         locations = {}
         for loc_data in data['locations']:  # Go through each element associated with the 'locations' key in the file
             location_obj = Location(loc_data['id'], loc_data['brief_description'], loc_data['long_description'],
-                                    loc_data['available_commands'], loc_data['items'])
+                                    loc_data['available_commands'], loc_data['items'],
+                                    loc_data['available_actions'])
             locations[loc_data['id']] = location_obj
 
         items = []
+        for item_data in data['items']:  # Assuming there's an 'items' key in the JSON file
+            # Here we assume 'items' contain dictionaries with the necessary attributes
+            item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'],
+                            item_data['target_position'], item_data['target_points'])
+            items.append(item_obj)
         # TODO: Add Item objects to the items list; your code should be structured similarly to the loop above
         # YOUR CODE BELOW
 
@@ -112,32 +121,44 @@ class AdventureGame:
             return self._locations[loc_id]
 
     def show_inventory(self):
+        """Return a list of items you have in your inventory"""
         print("Your Inventory:" + item.name for item in self.inventory)
 
-    def pick_item(self, item_name: str):
+    def pick_item(self):
         """Pick up the item and add it to the inventory."""
         # Check if the 'pick up' action is available at the current location
         current_location = self.get_location(self.current_location_id)
 
         if "pick up" in current_location.available_actions and current_location.available_actions["pick up"]:
-            # Add the item to the inventory
-            self.inventory.append(item_name)  # Add the item to the inventory
-            print(f"You picked up {item_name}. It has been added to your inventory.")
+            if current_location.items:  # Ensure there's an item to pick up
+                item = current_location.items[0]  # Assume only one item per location
+                self.inventory.append(item)  # Add to inventory
+                self.score += item.target_points
+                print(f"You picked up {item}. It has been added to your inventory.")
+            else:
+                print("There is nothing to pick up here.")
         else:
-            print(f"Picking up {item_name} is not an available action at this location.")
+            print("You chose not to pick up anything.")
 
-    def buy_item(self, item_name: str):
+    def buy_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
-    # Check if the 'buy' action is available at the current location
+        # Check if the 'buy' action is available at the current location
         current_location = self.get_location(self.current_location_id)
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
-        # Add the item to the inventory
-            self.inventory.append(item_name)  # Add the item to the inventory
-            print(f"You bought {item_name}. It has been added to your inventory.")
+            if current_location.items:  # Ensure there's an item to buy
+                item = current_location.items[0]  # Assume only one item per location
+                self.inventory.append(item)  # Add to inventory
+                self.score += item.target_points
+                print(f"You bought {item}. It has been added to your inventory.")
+            else:
+                print("There is nothing to buy here.")
         else:
-            print(f"Buying {item_name} is not an available action at this location.")
+            print("You chose not to buy anything.")
 
+    def show_score(self):
+        """Display the current score"""
+        print(f"Your current score is: {self.score}")
 
 if __name__ == "__main__":
 
@@ -202,13 +223,13 @@ if __name__ == "__main__":
                 current_location = game.get_location()  # Get the current location
                 print(current_location.long_description)
             elif choice == "inventory":
-                game_log.show_inventory()
+                game.show_inventory()
             elif choice == "score":
-                game_log.
-            elif choice == "undo":
-                game_log.
+                game.show_score()
+            # elif choice == "undo":
+            #     game_log.
             elif choice == "quit":
-                game_log.
+                break
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
         else:
             # Handle non-menu actions
@@ -217,5 +238,5 @@ if __name__ == "__main__":
 
             # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
 
-        if
+        #if
             # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
