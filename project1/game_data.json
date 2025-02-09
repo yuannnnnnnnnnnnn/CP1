@@ -52,7 +52,8 @@
       "brief_description": "You are currently standing infront of the Sephora Vending machine at the UofT Bookstore.",
       "long_description": "You wandered inside the UofT Bookstore and spot the Sephora Vending Machine… something immediately catches your eye… your favourite lipgloss (which you just so happen ran out of)... how can you go about your day with dry lips! Do you buy the lipgloss?",
       "available_commands": {
-        "go north": 30
+        "go north": 30,
+        "go west": 70
       },
       "available_actions": {
         "buy": true,

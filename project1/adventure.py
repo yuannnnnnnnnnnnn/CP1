@@ -34,14 +34,20 @@ class AdventureGame:
     """A text adventure game class storing all location, item and map data.
 
     Instance Attributes:
-        - _locations:
-        - _items:
-        - current_location_id:
-        - ongoing:
+        - _locations: A dictionary mapping location IDs to Location objects, representing all locations in the game.
+        - _items: A list of Item objects, representing all items that exist in the game world.
+        - current_location_id: The ID of the player's current location.
+        - ongoing: A boolean indicating whether the game is still in progress (True) or has ended (False).
+        - inventory: A list of Item objects that the player has collected.
+        - score: An integer representing the player's current score, which can be positive or negative.
 
     Representation Invariants:
-        - # TODO add any appropriate representation invariants as needed
+        - all(location_id >= 0 for location_id in self._locations)  # Location IDs must be non-negative
+        - all(isinstance(loc, Location) for loc in self._locations.values())
+        - all(isinstance(item, Item) for item in self._items)
+        - self.current_location_id in self._locations
     """
+    # lines 43 - 48 were provided by ChatGPT (DO BE EDITED)
 
     # Private Instance Attributes (do NOT remove these two attributes):
     #   - _locations: a mapping from location id to Location object.
@@ -73,7 +79,7 @@ class AdventureGame:
 
         # Suggested helper method (you can remove and load these differently if you wish to do so):
         self._locations, self._items = self._load_game_data(game_data_file)
-        # self._items = []  # eh i don't know if this is right but i made the change
+        # self._items = []  # eh I don't know if this is right, but I made the change
 
         # Suggested attributes (you can remove and track these differently if you wish to do so):
         self.current_location_id = initial_location_id  # game begins at this location
@@ -180,6 +186,7 @@ class AdventureGame:
         """Display the current score"""
         print(f"Your current score is: {self.score}")
 
+
 if __name__ == "__main__":
 
     # When you are ready to check your work with python_ta, uncomment the following lines.
@@ -210,14 +217,13 @@ if __name__ == "__main__":
             choice = game_log.last.next_command
 
         new_event = Event(id_num=location.id_num, description=location.brief_description, next_command=choice,
-                next=None,prev=None)
-            #  Note that the <choice> variable should be the command which led to this event
+                          next=None, prev=None)
+        #  Note that the <choice> variable should be the command which led to this event
         # YOUR CODE HERE
 
         # TODO: Depending on whether or not it's been visited before,
         #  print either full description (first time visit) or brief description (every subsequent visit) of location
         # YOUR CODE HERE
-
 
         # Display possible actions at this location
         print("What to do? Choose from: look, inventory, score, undo, log, quit, buy, deposit")
@@ -270,5 +276,5 @@ if __name__ == "__main__":
 
             # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
 
-        #if
+        # if
             # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game

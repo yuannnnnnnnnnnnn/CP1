@@ -6,6 +6,7 @@ pygame.init()
 
 
 def solve_puzzle():
+    """..."""
     # Set up the game window
     screen = pygame.display.set_mode((400, 300))
     pygame.display.set_caption("Ramen Puzzle")

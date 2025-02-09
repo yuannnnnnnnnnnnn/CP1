@@ -50,7 +50,7 @@ class AdventureGameSimulation:
 
         initial_location = self._game.get_location()  # gives back the current location
         initial_event = Event(id_num=initial_location.id_num, description=initial_location.brief_description,
-                               next_command=None, next=None, prev=None)
+                              next_command=None, next=None, prev=None)
         self._events.add_event(initial_event)
         # lines 125 - 128 were provided by ChatGPT
 
@@ -143,8 +143,12 @@ if __name__ == "__main__":
     })
 
     # TODO: Modify the code below to provide a walkthrough of commands needed to win and lose the game
-    win_walkthrough = []  # Create a list of all the commands needed to walk through your game to win it
-    expected_log = []  # Update this log list to include the IDs of all locations that would be visited
+    win_walkthrough = ["go east", "look", "take", "running time", "go west", "go west", "look", "look", "binary",
+                       "go west", "look", "buy", "linked list", "go north", "look", "pick up", "recursion", "go south",
+                       "go south", "look", "pick up", "trees", "go east", "look", "buy", "mutation", "go north",
+                       "go east"]  # Create a list of all the commands needed to walk through your game to win it
+    expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
+    # Update expected_log list to include the IDs of all locations that would be visited
     # Uncomment the line below to test your walkthrough
     sim = AdventureGameSimulation('game_data.json', 1, win_walkthrough)
     assert expected_log == sim.get_id_log()
