@@ -94,7 +94,7 @@ class AdventureGame:
         for loc_data in data['locations']:  # Go through each element associated with the 'locations' key in the file
             location_obj = Location(loc_data['id'], loc_data['brief_description'], loc_data['long_description'],
                                     loc_data['available_commands'], loc_data['items'],
-                                    loc_data['available_actions'])
+                                    available_actions=loc_data.get('available_actions', {}))
             locations[loc_data['id']] = location_obj
 
         items = []
@@ -209,8 +209,9 @@ if __name__ == "__main__":
         for action in location.available_commands:
             print("-", action)
         print("And you can also:")
-        for moves in location.available_actions:
-            print("-", moves)
+        if location.available_actions:  # Ensure it isn't empty or None
+            for moves, available in location.available_actions.items():
+                print("-", moves)
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()
