@@ -153,12 +153,28 @@ class AdventureGame:
             if current_location.items:  # Ensure there's an item to buy
                 item = current_location.items[0]  # Get the first item from the list of items
                 self.inventory.append(item)  # Add the item to inventory
-                self.score += item.target_points
+                # self.score += item.target_points
                 print(f"You bought {item}. It has been added to your inventory.")
             else:
                 print("There is nothing to buy here.")
         else:
             print("You chose not to buy anything.")
+
+    def take_item(self):
+        """Handle the purchase of an item if the 'buy' action is available."""
+        # Check if the 'buy' action is available at the current location
+        current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
+
+        if "take" in current_location.available_actions and current_location.available_actions["take"]:
+            if current_location.items:  # Ensure there's an item to buy
+                item = current_location.items[0]  # Get the first item from the list of items
+                self.inventory.append(item)  # Add the item to inventory
+                # self.score += item.target_points
+                print(f"You took {item}. It has been added to your inventory.")
+            else:
+                print("There is nothing to take here.")
+        else:
+            print("You chose not to take anything.")
 
     def show_score(self):
         """Display the current score"""
@@ -177,7 +193,7 @@ if __name__ == "__main__":
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
-    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check"]  # Regular menu options available at each location
+    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check", "take"]  # Regular menu options available at each location
     choice = None
 
     # Note: You may modify the code below as needed; the following starter code is just a suggestion
@@ -244,6 +260,8 @@ if __name__ == "__main__":
                 pass
             elif choice == "quit":
                 break
+            elif choice == "take":
+                game.take_item()
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
         else:
             # Handle non-menu actions
