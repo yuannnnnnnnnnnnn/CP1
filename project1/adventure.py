@@ -121,7 +121,12 @@ class AdventureGame:
 
     def show_inventory(self):
         """Return a list of items you have in your inventory"""
-        print("Your Inventory:" + item.name for item in self.inventory)
+        if not self.inventory:
+            print("Your inventory is empty.")
+        else:
+            print("Your inventory contains:")
+            for item in self.inventory:
+                print(f"- {item.name}: {item.description}")
 
     def pick_item(self):
         """Pick up the item and add it to the inventory."""
@@ -203,9 +208,10 @@ if __name__ == "__main__":
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
-        # print("And... ")
-        # for move in location.available_actions:
-        #     print("-", move)
+        print("And you can also:")
+        for action, available in location.available_actions.items():
+            if available:
+                print(f"- {action}")
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()
