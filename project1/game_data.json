@@ -41,7 +41,7 @@
         "go west": 20
       },
       "available_actions": {
-        "pick up": true,
+        "buy": true,
         "no": false
       },
       "items": ["Bubble Tea"]

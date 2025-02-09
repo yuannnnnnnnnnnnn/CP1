@@ -91,14 +91,14 @@ class AdventureGame:
             data = json.load(f)  # This loads all the data from the JSON file
 
         locations = {}
-        for loc_data in data['locations']:  # Go through each element associated with the 'locations' key in the file
+        for loc_data in data.get('locations', []):  # Go through each element associated with the 'locations' key in the file
             location_obj = Location(loc_data['id'], loc_data['brief_description'], loc_data['long_description'],
                                     loc_data['available_commands'], loc_data['items'],
                                     available_actions=loc_data.get('available_actions', {}))
             locations[loc_data['id']] = location_obj
 
         items = []
-        for item_data in data['items']:
+        for item_data in data.get('items', []):
             item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'],
                             item_data['target_position'], item_data['target_points'])
             items.append(item_obj)
@@ -126,7 +126,7 @@ class AdventureGame:
         else:
             print("Your inventory contains:")
             for item in self.inventory:
-                print(f"- {item.name}: {item.description}")
+                print(f"- {item}")
 
     def pick_item(self):
         """Pick up the item and add it to the inventory."""
@@ -137,7 +137,7 @@ class AdventureGame:
             if current_location.items:  # Ensure there's an item to pick up
                 item = current_location.items[0]  # Assume only one item per location
                 self.inventory.append(item)  # Add to inventory
-                self.score += item.target_points
+                # self.score += item.target_points
                 print(f"You picked up {item}. It has been added to your inventory.")
             else:
                 print("There is nothing to pick up here.")
@@ -147,12 +147,12 @@ class AdventureGame:
     def buy_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
         # Check if the 'buy' action is available at the current location
-        current_location = self.get_location(self.current_location_id)
+        current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
             if current_location.items:  # Ensure there's an item to buy
-                item = current_location.items[0]  # Assume only one item per location
-                self.inventory.append(item)  # Add to inventory
+                item = current_location.items[0]  # Get the first item from the list of items
+                self.inventory.append(item)  # Add the item to inventory
                 self.score += item.target_points
                 print(f"You bought {item}. It has been added to your inventory.")
             else:
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
-    menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
+    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check"]  # Regular menu options available at each location
     choice = None
 
     # Note: You may modify the code below as needed; the following starter code is just a suggestion
@@ -204,7 +204,7 @@ if __name__ == "__main__":
 
 
         # Display possible actions at this location
-        print("What to do? Choose from: look, inventory, score, undo, log, quit")
+        print("What to do? Choose from: look, inventory, score, undo, log, quit, buy, deposit")
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
@@ -236,6 +236,12 @@ if __name__ == "__main__":
                 game.show_score()
             # elif choice == "undo":
             #     game_log.
+            elif choice == 'pick up':
+                game.pick_item()
+            elif choice == 'buy':
+                game.buy_item()
+            elif choice == 'no':
+                pass
             elif choice == "quit":
                 break
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
