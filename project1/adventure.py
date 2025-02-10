@@ -23,6 +23,7 @@ from typing import Optional
 
 from game_entities import Location, Item
 from proj1_event_logger import Event, EventList
+from project1.new_college_puzzle import display_text
 
 
 # Note: You may add in other import statements here as needed
@@ -161,12 +162,17 @@ class AdventureGame:
         item_name = location.items[0]
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
-            if current_location.items:  # Ensure there's an item to buy
+            if current_location.items:
+                if current_location.id_num == 20:  # Ensure there's an item to buy
 
-                item = current_location.items[0]  # Get the first item from the list of items
-                self.inventory.append(item)  # Add the item to inventory
-                self.score += self.item_dict[item_name].target_points
-                print(f"You bought {item}. It has been added to your inventory.")
+                    if display_text():
+                        item = current_location.items[0]  # Get the first item from the list of items
+                        self.inventory.append(item)  # Add the item to inventory
+                        self.score += self.item_dict[item_name].target_points
+                        print(f"You bought {item}. It has been added to your inventory.")
+                    else:
+                        print("You couldn't solve the Ramen puzzle.")
+
             else:
                 print("There is nothing to buy here.")
         else:

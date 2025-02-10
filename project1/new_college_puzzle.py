@@ -58,7 +58,7 @@ def display_text():
                         user_input = user_input[:-1]  # Remove last character
                     elif event.key == pygame.K_RETURN:
                         if user_input.lower() == correct_answer:
-                            message = "Correct! You get the ramen!"
+                            pygame.quit()
                         else:
                             message = "Wrong! Try again."
                         user_input = ""  # Clear input after pressing enter
@@ -127,4 +127,4 @@ def wrap_text(text, font, max_width):
 
 
 # Run the display function
-display_text()
+# display_text()
