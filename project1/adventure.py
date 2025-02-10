@@ -233,10 +233,15 @@ if __name__ == "__main__":
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
-        print("And you can also:")
-        if location.available_actions:  # Ensure it isn't empty or None
-            for moves, available in location.available_actions.items():
-                print("-", moves)
+        if location.items and all(item in game.inventory for item in location.items):
+            print("No available action")
+        else:
+            print("And you can also:")
+
+            # Ensure available_actions exist before looping
+            if location.available_actions:
+                for moves, available in location.available_actions.items():
+                    print("-", moves)
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()
