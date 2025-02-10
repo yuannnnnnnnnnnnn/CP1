@@ -192,6 +192,26 @@ class AdventureGame:
             else:
                 print("There is nothing to take here.")
 
+    def check_item(self):
+        """Handle the purchase of an item if the 'buy' action is available."""
+        # Check if the 'buy' action is available at the current location
+        current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
+        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        item_name = location.items[0]
+
+        if "check" in current_location.available_actions and current_location.available_actions["check"]:
+            if current_location.items:  # Ensure there's an item to buy
+                item = current_location.items[0]  # Get the first item from the list of items
+                if item not in self.inventory:
+                    self.inventory.append(item)  # Add the item to inventory
+                    self.score += self.item_dict[item_name].target_points
+                # self.score += item.target_points
+                    print(f"You cehcked {item}. It has been added to your inventory.")
+                else:
+                    print("This item has already been retrieved. Move along~")
+            else:
+                print("There is nothing to check here.")
+
     def show_score(self):
         """Display the current score"""
         print(f"Your current score is: {self.score}")
@@ -241,8 +261,7 @@ if __name__ == "__main__":
         for action in location.available_commands:
             print("-", action)
         if location.id_num == 50:
-
-            if ["Laptop Charger", "USB Drive", "Lucky Mug"] in game.inventory:
+            if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
                 print("And you can also:")
 
                 # Ensure available_actions exist before looping
@@ -293,6 +312,8 @@ if __name__ == "__main__":
                 break
             elif choice == "take":
                 game.take_item()
+            elif choice == 'check':
+                game.check_item()
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
         else:
             # Handle non-menu actions
