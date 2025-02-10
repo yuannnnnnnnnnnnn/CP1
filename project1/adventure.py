@@ -142,7 +142,7 @@ class AdventureGame:
         if "pick up" in current_location.available_actions and current_location.available_actions["pick up"]:
             if current_location.items:  # Ensure there's an item to pick up
                 item = current_location.items[0]  # Assume only one item per location
-                if item in self.inventory:
+                if item not in self.inventory:
                     self.inventory.append(item)  # Add to inventory
                     # self.score += item.target_points
                     print(f"You picked up {item}. It has been added to your inventory.")
@@ -233,10 +233,9 @@ if __name__ == "__main__":
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
-        if location.id_num != 50:
-            if location.items and all(item in game.inventory for item in location.items):
-                pass
-            else:
+        if location.id_num == 50:
+
+            if ["Laptop Charger", "USB Drive", "Lucky Mug"] in game.inventory:
                 print("And you can also:")
 
                 # Ensure available_actions exist before looping
@@ -244,7 +243,9 @@ if __name__ == "__main__":
                     for moves, available in location.available_actions.items():
                         print("-", moves)
         else:
-            if ["Laptop Charger", "USB Drive", "Lucky Mug"] in game.inventory:
+            if location.items and all(item in game.inventory for item in location.items):
+                pass
+            else:
                 print("And you can also:")
 
                 # Ensure available_actions exist before looping
