@@ -51,6 +51,15 @@ class Event:
     next: Optional[Event] = None
     prev: Optional[Event] = None
 
+    # def __init__(self, id_num, command=None):
+    #     """
+    #     Initialize an event with a location ID and an optional command.
+    #     """
+    #     self.id_num = id_num  # Location ID
+    #     self.next_command = command  # Command that led to this event
+    #     self.next = None  # Pointer to the next event, default is None
+    #     self.prev = None
+
 
 class EventList:
     """
@@ -89,19 +98,35 @@ class EventList:
         """Add the given new event to the end of this event list.
         The given command is the command which was used to reach this new event, or None if this is the first
         event in the game.
-        """
+
+        # >>> game_log = EventList()
+        # >>> game_log.add_event(Event(10), "go north")
+        # >>> game_log.first.id_num
+        # 10
+        # >>> game_log.first.next is None
+        # True
+        # >>> game_log.add_event(Event(20), "pick up key")
+        # >>> game_log.first.next.id_num
+        # 20
+        # >>> game_log.first.next_command
+        # 'go north'
+        # >>> game_log.first.next.next is None
+        # True
+        # """
         # Hint: You should update the previous node's <next_command> as needed
 
-        curr = self.first
-
-        if curr is None:
+        if self.first is None:
             self.first = event
+            event.next_command = command
+        else:
+            curr = self.first
+            while curr.next is not None:
+                curr = curr.next
 
-        while curr is not None:
-            curr = curr.next
+            curr.next = event
+            event.prev = curr
+            curr.next_command = command
 
-        curr.next_commant = command
-        curr.next = event
 
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
