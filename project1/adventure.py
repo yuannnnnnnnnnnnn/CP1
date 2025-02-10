@@ -138,13 +138,15 @@ class AdventureGame:
         """Pick up the item and add it to the inventory."""
         # Check if the 'pick up' action is available at the current location
         current_location = self.get_location(self.current_location_id)
+        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        item_name = location.items[0]
 
         if "pick up" in current_location.available_actions and current_location.available_actions["pick up"]:
             if current_location.items:  # Ensure there's an item to pick up
                 item = current_location.items[0]  # Assume only one item per location
                 if item not in self.inventory:
                     self.inventory.append(item)  # Add to inventory
-                    # self.score += item.target_points
+                    self.score += self.item_dict[item_name].target_points
                     print(f"You picked up {item}. It has been added to your inventory.")
                 else:
                     print("This item has already been retrieved. Move along~")
@@ -155,13 +157,15 @@ class AdventureGame:
         """Handle the purchase of an item if the 'buy' action is available."""
         # Check if the 'buy' action is available at the current location
         current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
+        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        item_name = location.items[0]
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
             if current_location.items:  # Ensure there's an item to buy
 
                 item = current_location.items[0]  # Get the first item from the list of items
                 self.inventory.append(item)  # Add the item to inventory
-                # self.score += item.target_points
+                self.score += self.item_dict[item_name].target_points
                 print(f"You bought {item}. It has been added to your inventory.")
             else:
                 print("There is nothing to buy here.")
@@ -172,12 +176,15 @@ class AdventureGame:
         """Handle the purchase of an item if the 'buy' action is available."""
         # Check if the 'buy' action is available at the current location
         current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
+        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        item_name = location.items[0]
 
         if "take" in current_location.available_actions and current_location.available_actions["take"]:
             if current_location.items:  # Ensure there's an item to buy
                 item = current_location.items[0]  # Get the first item from the list of items
                 if item not in self.inventory:
                     self.inventory.append(item)  # Add the item to inventory
+                    self.score += self.item_dict[item_name].target_points
                 # self.score += item.target_points
                     print(f"You took {item}. It has been added to your inventory.")
                 else:
