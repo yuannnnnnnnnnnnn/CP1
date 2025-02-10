@@ -325,7 +325,8 @@ if __name__ == "__main__":
             elif choice == 'no':
                 pass
             elif choice == "quit":
-                break
+                game.ongoing = False
+                exit()
             elif choice == "take":
                 game.take_item()
             elif choice == 'check':
