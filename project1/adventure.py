@@ -23,7 +23,8 @@ from typing import Optional
 
 from game_entities import Location, Item
 from proj1_event_logger import Event, EventList
-from project1.new_college_puzzle import display_text
+from project1.new_college_puzzle import display_puzzle1
+from project1.kungfutea_puzzle import display_puzzle2
 
 
 # Note: You may add in other import statements here as needed
@@ -165,10 +166,18 @@ class AdventureGame:
             if current_location.items:
                 if current_location.id_num == 20:  # Ensure there's an item to buy
 
-                    if display_text():
+                    if display_puzzle1():
                         item = current_location.items[0]  # Get the first item from the list of items
                         self.inventory.append(item)  # Add the item to inventory
                         self.score += self.item_dict[item_name].target_points
+                        print(f"You bought {item}. It has been added to your inventory.")
+                    else:
+                        print("You couldn't solve the Ramen puzzle.")
+                elif current_location.id_num == 30:
+                    if display_puzzle2():
+                        item = current_location.items[0]
+                        self.inventory.append(item)
+                        self.score = self.item_dict[item_name].target_points
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Ramen puzzle.")
@@ -247,13 +256,14 @@ if __name__ == "__main__":
         location = game.get_location()
 
         # TODO: Add new Event to game log to represent current game location
-        if game_log.first is None:
-            choice = None
-        else:
-            choice = game_log.last.next_command
+        # if game_log.first is None:
+        #     choice = None
+        # else:
+        #     choice = game_log.last.next_command
 
         new_event = Event(id_num=location.id_num, description=location.brief_description, next_command=choice,
                           next=None, prev=None)
+        game_log.add_event(new_event)
         #  Note that the <choice> variable should be the command which led to this event
         # YOUR CODE HERE
 

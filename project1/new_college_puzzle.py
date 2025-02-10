@@ -4,7 +4,7 @@ import pygame
 pygame.init()
 
 
-def display_text():
+def display_puzzle1():
     """Displays the word scramble puzzle and handles user input."""
     # Set up the game window
     screen_width, screen_height = 600, 600

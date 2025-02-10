@@ -4,7 +4,7 @@ import pygame
 pygame.init()
 
 
-def display_text():
+def display_puzzle2():
     """Displays the word scramble puzzle and handles user input."""
     # Set up the game window
     screen_width, screen_height = 600, 300
@@ -48,6 +48,7 @@ def display_text():
                     elif event.key == pygame.K_RETURN:
                         if user_input.lower() == correct_answer:
                             message = "Correct! You get the ramen!"
+                            running = False
                         else:
                             message = "Wrong! Try again."
                         user_input = ""  # Clear input after pressing enter
@@ -77,6 +78,3 @@ def display_text():
         clock.tick(30)  # Set the frame rate to 30 FPS
 
     pygame.quit()
-
-
-display_text()

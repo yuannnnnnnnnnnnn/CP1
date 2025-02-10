@@ -83,7 +83,8 @@ class EventList:
         self.last = None
 
     def display_events(self) -> None:
-        """Display all events in chronological order."""
+        """Display all events in chronological order.
+        """
         curr = self.first
         while curr:
             print(f"Location: {curr.id_num}, Command: {curr.next_command}")
@@ -98,21 +99,7 @@ class EventList:
         """Add the given new event to the end of this event list.
         The given command is the command which was used to reach this new event, or None if this is the first
         event in the game.
-
-        # >>> game_log = EventList()
-        # >>> game_log.add_event(Event(10), "go north")
-        # >>> game_log.first.id_num
-        # 10
-        # >>> game_log.first.next is None
-        # True
-        # >>> game_log.add_event(Event(20), "pick up key")
-        # >>> game_log.first.next.id_num
-        # 20
-        # >>> game_log.first.next_command
-        # 'go north'
-        # >>> game_log.first.next.next is None
-        # True
-        # """
+        """
         # Hint: You should update the previous node's <next_command> as needed
 
         if self.first is None:
@@ -126,7 +113,6 @@ class EventList:
             curr.next = event
             event.prev = curr
             curr.next_command = command
-
 
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
