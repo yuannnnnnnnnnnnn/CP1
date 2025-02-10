@@ -226,7 +226,7 @@ if __name__ == "__main__":
         # YOUR CODE HERE
 
         # Display possible actions at this location
-        print("What to do? Choose from: look, inventory, score, undo, log, quit, buy, deposit")
+        print("What to do? Choose from: look, inventory, score, undo, log, quit")
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
