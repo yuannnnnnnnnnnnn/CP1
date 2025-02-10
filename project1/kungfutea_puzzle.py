@@ -23,18 +23,7 @@ def display_text():
     input_font = pygame.font.SysFont(None, 40)  # Font for the input text
     clock = pygame.time.Clock()
 
-    # Long text
-    long_text = """The cook is putting together your ramen–you’re basically salivating–but right
-    before he was about to hand you your bowl, he handed you a sheet of paper with what
-    seems to be random letters put together. He strikes up an offer:
-    If you can unscramble the word written on this paper, you can get this bowl of ramen for
-    free. HOLY MOLY! How can you pass up on this offer?"""
-
-    # Wrap the text based on screen width
-    lines = wrap_text(long_text, font, screen_width - 40)  # Subtract padding from screen width
-
-    scrambled_word = "tostuank"  # The scrambled version of "tonkatsu"
-    correct_answer = "tonkatsu"  # Correct answer for the puzzle
+    correct_answer = "lychee"  # Correct answer for the puzzle
     user_input = ""  # Input that user types
     input_active = False  # State if the input box is active or not
     message = ""  # Message to show result feedback
@@ -68,23 +57,12 @@ def display_text():
         # Fill the screen with black
         screen.fill((0, 0, 0))
 
-        # Render the wrapped text
-        y_offset = 20  # Starting position for the first line
-        for line in lines:
-            text_surface = font.render(line, True, (255, 255, 255))  # Render the line in white
-            screen.blit(text_surface, (20, y_offset))  # Draw the text surface to the screen
-            y_offset += font.get_height()  # Space between lines dynamically adjusts with font height
-
-        # Draw the scrambled word
-        scrambled_text = font.render(f"Scrambled word: {scrambled_word}", True, (255, 255, 0))  # Yellow color
-        screen.blit(scrambled_text, (screen_width // 2 - scrambled_text.get_width() // 2, y_offset + 10))
-
         # Draw the image onto the screen
         screen.blit(chef_image, (chef_x, chef_y))
 
         # Draw the input box
-        input_box = pygame.Rect(200, screen_height - 85, 300, 40)
-        pygame.draw.rect(screen, (0, 0, 0), input_box, 2)
+        input_box = pygame.Rect(320, screen_height - 85, 250, 40)
+        pygame.draw.rect(screen, (255, 255, 255), input_box, 2)
 
         # Render the user's typed text in the input box
         input_text_surface = input_font.render(user_input, True, (0, 0, 0))
@@ -101,30 +79,4 @@ def display_text():
     pygame.quit()
 
 
-def wrap_text(text, font, max_width):
-    """Wrap text to fit within the specified width."""
-    lines = []
-    words = text.split(' ')  # Split text into words
-
-    current_line = ""
-    for word in words:
-        # Check if adding the word exceeds the max width
-        test_line = f"{current_line} {word}".strip()
-        test_surface = font.render(test_line, True, (255, 255, 255))
-
-        if test_surface.get_width() <= max_width:
-            current_line = test_line  # Add word to current line
-        else:
-            # If the line exceeds the max width, start a new line
-            lines.append(current_line)
-            current_line = word
-
-    # Add the last line if there is any remaining text
-    if current_line:
-        lines.append(current_line)
-
-    return lines
-
-
-# Run the display function
 display_text()
