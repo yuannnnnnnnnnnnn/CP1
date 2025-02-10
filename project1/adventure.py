@@ -175,7 +175,7 @@ class AdventureGame:
     def take_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
         # Check if the 'buy' action is available at the current location
-        current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
+        current_location = self.get_location(self.current_location_id)  # current_location.id_num will print 30
         self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
         item_name = location.items[0]
 
@@ -236,7 +236,7 @@ if __name__ == "__main__":
         # YOUR CODE HERE
 
         # Display possible actions at this location
-        print("What to do? Choose from: look, inventory, score, undo, log, quit")
+        print("What would you like to do? Choose from: look, inventory, score, undo, log, quit")
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
