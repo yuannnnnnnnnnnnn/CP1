@@ -233,15 +233,24 @@ if __name__ == "__main__":
         print("At this location, you can also:")
         for action in location.available_commands:
             print("-", action)
-        if location.items and all(item in game.inventory for item in location.items):
-            print("No available action")
-        else:
-            print("And you can also:")
+        if location.id_num != 50:
+            if location.items and all(item in game.inventory for item in location.items):
+                pass
+            else:
+                print("And you can also:")
 
-            # Ensure available_actions exist before looping
-            if location.available_actions:
-                for moves, available in location.available_actions.items():
-                    print("-", moves)
+                # Ensure available_actions exist before looping
+                if location.available_actions:
+                    for moves, available in location.available_actions.items():
+                        print("-", moves)
+        else:
+            if ["Laptop Charger", "USB Drive", "Lucky Mug"] in game.inventory:
+                print("And you can also:")
+
+                # Ensure available_actions exist before looping
+                if location.available_actions:
+                    for moves, available in location.available_actions.items():
+                        print("-", moves)
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()
