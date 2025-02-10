@@ -142,13 +142,14 @@ class AdventureGame:
         if "pick up" in current_location.available_actions and current_location.available_actions["pick up"]:
             if current_location.items:  # Ensure there's an item to pick up
                 item = current_location.items[0]  # Assume only one item per location
-                self.inventory.append(item)  # Add to inventory
-                # self.score += item.target_points
-                print(f"You picked up {item}. It has been added to your inventory.")
+                if item in self.inventory:
+                    self.inventory.append(item)  # Add to inventory
+                    # self.score += item.target_points
+                    print(f"You picked up {item}. It has been added to your inventory.")
+                else:
+                    print("This item has already been retrieved. Move along~")
             else:
                 print("There is nothing to pick up here.")
-        else:
-            print("You chose not to pick up anything.")
 
     def buy_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
@@ -157,6 +158,7 @@ class AdventureGame:
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
             if current_location.items:  # Ensure there's an item to buy
+
                 item = current_location.items[0]  # Get the first item from the list of items
                 self.inventory.append(item)  # Add the item to inventory
                 # self.score += item.target_points
@@ -174,13 +176,14 @@ class AdventureGame:
         if "take" in current_location.available_actions and current_location.available_actions["take"]:
             if current_location.items:  # Ensure there's an item to buy
                 item = current_location.items[0]  # Get the first item from the list of items
-                self.inventory.append(item)  # Add the item to inventory
+                if item not in self.inventory:
+                    self.inventory.append(item)  # Add the item to inventory
                 # self.score += item.target_points
-                print(f"You took {item}. It has been added to your inventory.")
+                    print(f"You took {item}. It has been added to your inventory.")
+                else:
+                    print("This item has already been retrieved. Move along~")
             else:
                 print("There is nothing to take here.")
-        else:
-            print("You chose not to take anything.")
 
     def show_score(self):
         """Display the current score"""
