@@ -62,6 +62,7 @@ class AdventureGame:
     ongoing: bool  # Suggested attribute, can be removed
     inventory: list[Item]
     score: int
+    move: int
 
     def __init__(self, game_data_file: str, initial_location_id: int) -> None:
         """
@@ -88,6 +89,7 @@ class AdventureGame:
         self.ongoing = True  # whether the game is ongoing
         self.inventory = []
         self.score = 0
+        self.move = 0
 
     @staticmethod
     def _load_game_data(filename: str) -> tuple[dict[int, Location], list[Item]]:
@@ -231,6 +233,11 @@ class AdventureGame:
         """Display the current score"""
         print(f"Your current score is: {self.score}")
 
+    # def undo(self):
+    #     """Undo the last command or any action related to the game"""
+    #     if location.id_num == 10:
+
+
 
 if __name__ == "__main__":
 
@@ -245,8 +252,9 @@ if __name__ == "__main__":
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
-    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check", "take"]  # Regular menu options available at each location
+    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check", "take", "move"]  # Regular menu options available at each location
     choice = None
+
 
     # Note: You may modify the code below as needed; the following starter code is just a suggestion
     while game.ongoing:
@@ -331,13 +339,21 @@ if __name__ == "__main__":
                 game.take_item()
             elif choice == 'check':
                 game.check_item()
+            elif choice == 'move':
+                print(game.move)
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
         else:
             # Handle non-menu actions
             result = location.available_commands[choice]
             game.current_location_id = result
+            game.move += 1
 
             # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
 
         # if
             # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
+
+        if game.move <= 30:
+            if game.score >= 225:
+                if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
+                    print("Congratulations you have won the game")
