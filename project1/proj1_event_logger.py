@@ -51,13 +51,16 @@ class EventList:
     A linked list of game events.
 
     Instance Attributes:
-        - first: Event Object Representing the first event in EventList
-        - last: Even Object Representing the last event in EventList
+        - first: The first event in the list (or None if the list is empty).
+        - last: The last event in the list (or None if the list is empty).
+        - current: The current event being processed.
+        - is_move_function: A flag indicating whether the current event moves the player.
 
     Representation Invariants:
-        - self.first == self.last
+        - self.first is None == self.last is None
+        - (self.last is not None) => (self.last.next is None)
+        - (self.current is not None) => (self.first is not None)
     """
-    # idk is representation invariants are right... must change later meow
     first: Optional[Event]
     last: Optional[Event]
     current: Optional[Event]
@@ -104,14 +107,27 @@ class EventList:
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
         If the list is empty, do nothing."""
-        curr = self.first
-        if curr is None:
+        # curr = self.first
+        # if curr is None:
+        #     return
+        # while curr is not None:
+        #     curr = curr.next
+        # curr = curr.next
+        if self.first is None:
             return
 
-        while curr is not None:
+        if self.first == self.last:
+            self.first = None
+            self.last = None
+            return
+
+        curr = self.first
+        while curr.next.next is not None:
             curr = curr.next
 
-        curr = curr.next
+        curr.next = None
+        curr.next_command = None
+        self.last = curr
 
     def get_id_log(self) -> list[int]:
         """Return a list of all location IDs visited for each event in this list, in sequence."""

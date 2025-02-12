@@ -120,14 +120,14 @@ class AdventureGame:
     def pick_item(self):
         """Pick up the item and add it to the inventory."""
         # Check if the 'pick up' action is available at the current location
-        current_location = self.get_location(self.current_location_id)
+        curr_location = self.get_location(self.current_location_id)
         self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
         item_name = location.items[0]
 
-        if "pick up" in current_location.available_actions and current_location.available_actions["pick up"]:
-            if current_location.items:  # Ensure there's an item to pick up
-                if current_location.id_num == 10:
-                    item = current_location.items[0]
+        if "pick up" in curr_location.available_actions and curr_location.available_actions["pick up"]:
+            if curr_location.items:  # Ensure there's an item to pick up
+                if curr_location.id_num == 10:
+                    item = curr_location.items[0]
                     if item not in self.inventory:
                         if display_puzzle10():
 
@@ -143,14 +143,14 @@ class AdventureGame:
 
     def buy_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
-        current_location = self.get_location(self.current_location_id)
+        curr_location = self.get_location(self.current_location_id)
         self.item_dict = {item.name: item for item in self._items}
         item_name = location.items[0]
 
-        if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
+        if "buy" in curr_location.available_actions and curr_location.available_actions["buy"]:
             if location.id_num == 20:  # Ensure there's an item to buy
                 if display_puzzle1():
-                    item = current_location.items[0]  # item = Ramen
+                    item = curr_location.items[0]  # item = Ramen
                     self.inventory.append(item)  # Add the item to inventory
                     self.score += self.item_dict[item_name].target_points
                     print(f"You bought {item}. It has been added to your inventory.")
@@ -158,7 +158,7 @@ class AdventureGame:
                     print("You couldn't solve the Ramen puzzle.")
             elif location.id_num == 30:
                 if display_puzzle2():
-                    item = current_location.items[0]
+                    item = curr_location.items[0]
                     self.inventory.append(item)
                     self.score += self.item_dict[item_name].target_points
                     print(f"You bought {item}. It has been added to your inventory.")
@@ -166,7 +166,7 @@ class AdventureGame:
                     print("You couldn't solve the Bubble Tea puzzle.")
             elif location.id_num == 40:
                 if display_puzzle40():
-                    item = current_location.items[0]
+                    item = curr_location.items[0]
                     self.inventory.append(item)
                     self.score += self.item_dict[item_name].target_points
                     print(f"You bought {item}. It has been added to your inventory.")
@@ -175,15 +175,15 @@ class AdventureGame:
 
     def take_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
-        current_location = self.get_location(self.current_location_id)  # current_location.id_num will print 30
-        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        curr_location = self.get_location(self.current_location_id)
+        self.item_dict = {item.name: item for item in self._items}
         item_name = location.items[0]
 
-        if "take" in current_location.available_actions and current_location.available_actions["take"]:
-            item = current_location.items[0]
+        if "take" in curr_location.available_actions and curr_location.available_actions["take"]:
+            item = curr_location.items[0]
             if item not in self.inventory:
                 if display_puzzle60():
-                    self.inventory.append(item)  # Add the item to inventory
+                    self.inventory.append(item)
                     self.score += self.item_dict[item_name].target_points
                     print(f"You took {item}. It has been added to your inventory.")
                 else:
@@ -195,20 +195,19 @@ class AdventureGame:
 
     def check_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
-        current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
-        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        curr_location = self.get_location(self.current_location_id)
+        self.item_dict = {item.name: item for item in self._items}
         item_name = location.items[0]
 
-        if "check" in current_location.available_actions and current_location.available_actions["check"]:
-            if current_location.items:  # Ensure there's an item to buy
-                item = current_location.items[0]  # Get the first item from the list of items
+        if "check" in curr_location.available_actions and curr_location.available_actions["check"]:
+            if curr_location.items:
+                item = curr_location.items[0]
                 if item not in self.inventory:
                     if display_puzzle70():
-                        self.inventory.append(item)  # Add the item to inventory
+                        self.inventory.append(item)
                         self.score += self.item_dict[item_name].target_points
                     else:
                         print("You can't solve the puzzles")
-                # self.score += item.target_points
                     print(f"You checked {item}. It has been added to your inventory.")
                 else:
                     print("This item has already been retrieved. Move along~")
@@ -221,14 +220,12 @@ class AdventureGame:
 
     def undo_stuff(self):
         """Undo the last command or any action related to the game"""
-        current_location = self.get_location(self.current_location_id)  # current_location.id_num will print 30
-        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        self.item_dict = {item.name: item for item in self._items}
         item_name = location.items[0]
         if game_log.is_move_function == False:
             if self.inventory:
                 self.item_dict = {item.name: item for item in self._items}
-                # If the inventory is not empty, remove the last item
-                item = self.inventory.pop()  # Remove the latest added item
+                item = self.inventory.pop()
                 self.score += self.item_dict[item_name].target_points
                 print(f"Removed {item} from your inventory. Your score is now {self.score}.")
             else:
@@ -253,7 +250,6 @@ class AdventureGame:
 
 
 if __name__ == "__main__":
-
     # import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 120,
@@ -279,7 +275,8 @@ if __name__ == "__main__":
         for action in location.available_commands:
             print("-", action)
         if location.id_num == 50:
-            if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']) and game.score >= 250:
+            if (all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug'])
+                    and game.score >= 250):
                 print("And you can also:")
                 print("what if it's this one")
                 if location.available_actions:

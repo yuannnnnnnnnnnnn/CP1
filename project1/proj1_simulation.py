@@ -64,28 +64,22 @@ class AdventureGameSimulation:
         previous_event = None
 
         for command in commands:
-            # Check if the command is valid at the current location
             if command in current_location.available_commands:
                 next_location_id = current_location.available_commands[command]
-                next_location = self._game.get_location(next_location_id)  # Get the new location
+                next_location = self._game.get_location(next_location_id)
 
-                # Create a new event for this move
                 new_event = Event(id_num=next_location.id_num, description=next_location.brief_description,
                                   next_command=command, next=None, prev=previous_event)
 
-                # If there is a previous event, link it to the current event
                 if previous_event is not None:
                     previous_event.next = new_event
-                    previous_event.next_command = command  # Update the `next_command` for the previous event
+                    previous_event.next_command = command
 
-                # If this is the first event (no previous event), set it as the first event in the list
                 if self._events.is_empty():
                     self._events.first = new_event
 
-                # Add new event to the event list
                 self._events.add_event(new_event)
 
-                # Update the previous event to the current one for linking in the next iteration
                 previous_event = new_event
                 current_location = next_location
 
@@ -94,13 +88,13 @@ class AdventureGameSimulation:
         Get back a list of all location IDs in the order that they are visited within a game simulation
         that follows the given commands.
 
-        >>> sim = AdventureGameSimulation('sample_locations.json', 1, ["go east"])
+        >>> sim= AdventureGameSimulation('sample_locations.json', 50, ["go east"])
         >>> sim.get_id_log()
-        [1, 2]
+        [50, 60]
 
-        >>> sim = AdventureGameSimulation('sample_locations.json', 1, ["go east", "go east", "buy coffee"])
+        >>> sim = AdventureGameSimulation('sample_locations.json', 50, ["go east", "go west"])
         >>> sim.get_id_log()
-        [1, 2, 3, 3]
+        [50, 60, 50]
         """
         return self._events.get_id_log()
 
@@ -127,32 +121,32 @@ if __name__ == "__main__":
                        'go north', 'look', 'pick up', 'lock in', 'go south', 'go south', 'look', 'check', 'keyboard',
                        'go east', 'look', 'buy', '21', 'go north', 'go east', 'submit assignment']
     expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
-    sim = AdventureGameSimulation('game_data.json', 50, win_walkthrough)
-    assert expected_log == sim.get_id_log()
+    simulation= AdventureGameSimulation('game_data.json', 50, win_walkthrough)
+    assert expected_log == simulation.get_id_log()
 
     lose_demo = ['go east', 'go west', 'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north',
                  'go west', 'go north', 'go south', 'go south', 'go east', 'go north', 'go east', 'go east', 'go west',
                  'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north']
     expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 20, 10, 20, 70, 40, 30,
                     50, 60, 50, 30, 20, 10, 20, 70, 40, 30]
-    sim = AdventureGameSimulation('game_data.json', 50, lose_demo)
-    assert expected_log == sim.get_id_log()
+    simulation = AdventureGameSimulation('game_data.json', 50, lose_demo)
+    assert expected_log == simulation.get_id_log()
 
     inventory_demo = ['go west', 'look', 'buy', 'lychee', 'inventory', 'go west', 'look', 'buy', 'tonkatsu',
                       'inventory']
     expected_log = [50, 30, 20]
-    sim = AdventureGameSimulation('game_data.json', 50, inventory_demo)
-    assert expected_log == sim.get_id_log()
+    simulation = AdventureGameSimulation('game_data.json', 50, inventory_demo)
+    assert expected_log == simulation.get_id_log()
 
     scores_demo = ['go east', 'look', 'take', '120', 'score', 'go west', 'go west', 'look', 'buy', 'lychee', 'score']
     expected_log = [50, 60, 50, 30]
-    sim = AdventureGameSimulation('game_data.json', 50, scores_demo)
-    assert expected_log == sim.get_id_log()
+    simulation = AdventureGameSimulation('game_data.json', 50, scores_demo)
+    assert expected_log == simulation.get_id_log()
 
     enhancement_puzzle_demo = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee',
                                'go west', 'look', 'buy', 'tonkatsu', 'go north', 'look', 'pick up', 'lock in',
                                'go south', 'go south', 'look', 'check', 'keyboard', 'go east', 'look', 'buy', '21',
                                'go north', 'go west', 'submit assignment']
     expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
-    sim = AdventureGameSimulation('game_data.json', 50, enhancement_puzzle_demo)
-    assert expected_log == sim.get_id_log()
+    simulation = AdventureGameSimulation('game_data.json', 50, enhancement_puzzle_demo)
+    assert expected_log == simulation.get_id_log()

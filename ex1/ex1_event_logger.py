@@ -94,33 +94,40 @@ class EventList:
         """Add the given new event to the end of this event list.
         The given command is the command which was used to reach this new event, or None if this is the first
         event in the game.
+
         """
+
         # Hint: You should update the previous node's <next_command> as needed
-        curr = self.first
-
-        if curr is None:
+        if self.first is None:
             self.first = event
-
-        while curr is not None:
-            curr = curr.next
-
-        curr.next_commant = command
-        curr.next = event
+            self.last = event
+        else:
+            self.last.next_command = command
+            self.last.next = event
+            event.prev = self.last
+            self.last = event
 
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
         If the list is empty, do nothing."""
 
         # Hint: The <next_command> and <next> attributes for the new last event should be updated as needed
-        curr = self.first
 
-        if curr is None:
+        if self.first is None:
             return
 
-        while curr is not None:
+        if self.first == self.last:
+            self.first = None
+            self.last = None
+            return
+
+        curr = self.first
+        while curr.next.next is not None:
             curr = curr.next
 
-        curr = curr.next
+        curr.next = None
+        curr.next_command = None
+        self.last = curr
         # what does is mean that we have to update <next_command> and <next>
 
     def get_id_log(self) -> list[int]:
@@ -139,7 +146,6 @@ class EventList:
 
 
 if __name__ == "__main__":
-    pass
     # When you are ready to check your work with python_ta, uncomment the following lines.
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block

@@ -121,14 +121,13 @@ class AdventureGameSimulation:
         self._events = EventList()
         self._game = SimpleAdventureGame(game_data_file, initial_location_id)
 
-        initial_location = self._game.get_location()  # gives back the current location
+        initial_location = self._game.get_location()
         initial_event = Event(id_num=initial_location.id_num, description=initial_location.description,
                               next_command=None, next=None, prev=None)
         self._events.add_event(initial_event)
-        # lines 125 - 128 were provided by ChatGPT
 
         self.generate_events(commands, initial_location)
-        # line 132 was provided by ChatGPT
+        # line 130 provided by ChatGPT
 
     def generate_events(self, commands: list[str], current_location: Location) -> None:
         """Generate all events in this simulation.
@@ -140,28 +139,22 @@ class AdventureGameSimulation:
         previous_event = None
 
         for command in commands:
-            # Check if the command is valid at the current location
             if command in current_location.available_commands:
                 next_location_id = current_location.available_commands[command]
-                next_location = self._game.get_location(next_location_id)  # Get the new location
+                next_location = self._game.get_location(next_location_id)
 
-                # Create a new event for this move
                 new_event = Event(id_num=next_location.id_num, description=next_location.description,
                                   next_command=command, next=None, prev=previous_event)
 
-                # If there is a previous event, link it to the current event
                 if previous_event is not None:
                     previous_event.next = new_event
-                    previous_event.next_command = command  # Update the `next_command` for the previous event
+                    previous_event.next_command = command
 
-                # If this is the first event (no previous event), set it as the first event in the list
                 if self._events.is_empty():
                     self._events.first = new_event
 
-                # Add new event to the event list
                 self._events.add_event(new_event)
 
-                # Update the previous event to the current one for linking in the next iteration
                 previous_event = new_event
                 current_location = next_location
 
@@ -200,7 +193,6 @@ class AdventureGameSimulation:
 
 
 if __name__ == "__main__":
-    # pass
     # When you are ready to check your work with python_ta, uncomment the following lines.
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
