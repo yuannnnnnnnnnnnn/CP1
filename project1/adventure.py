@@ -175,9 +175,8 @@ class AdventureGame:
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
             if current_location.items:
-                print(current_location.id_num)
+                print(current_location.items[0])
                 if current_location == 20:  # Ensure there's an item to buy
-                    print("come in 20")
                     if display_puzzle1():
                         item = current_location.items[0]  # item = Ramen
                         self.inventory.append(item)  # Add the item to inventory
@@ -186,7 +185,6 @@ class AdventureGame:
                     else:
                         print("You couldn't solve the Ramen puzzle.")
                 elif current_location == 30:
-                    print("come in 30", current_location)
                     if display_puzzle2():
                         item = current_location.items[0]
                         self.inventory.append(item)
@@ -195,7 +193,6 @@ class AdventureGame:
                     else:
                         print("You couldn't solve the Bubble Tea puzzle.")
                 elif current_location == 40:
-                    print("come in 30", current_location)
                     if display_puzzle40:
                         item = current_location.items[0]
                         self.inventory.append(item)
