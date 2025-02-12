@@ -170,7 +170,7 @@ class AdventureGame:
         # Check if the 'buy' action is available at the current location
         current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
         self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
-        # item_name = location.items[0]
+        item_name = location.items[0]
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
             if current_location.items:
@@ -179,7 +179,7 @@ class AdventureGame:
                     if display_puzzle1():
                         item = current_location.items[0]  # Get the first item from the list of items
                         self.inventory.append(item)  # Add the item to inventory
-                        self.score += self.item_dict[item].target_points
+                        self.score += self.item_dict[item_name].target_points
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Ramen puzzle.")
@@ -187,7 +187,7 @@ class AdventureGame:
                     if display_puzzle2():
                         item = current_location.items[0]
                         self.inventory.append(item)
-                        self.score = self.item_dict[item].target_points
+                        self.score = self.item_dict[item_name].target_points
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Bubble Tea puzzle.")
@@ -195,7 +195,7 @@ class AdventureGame:
                     if display_puzzle40:
                         item = current_location.items[0]
                         self.inventory.append(item)
-                        self.score += self.item_dict[item].target_points
+                        self.score += self.item_dict[item_name].target_points
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Lip Gloss puzzle.")
