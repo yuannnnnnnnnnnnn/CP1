@@ -39,8 +39,6 @@ class AdventureGame:
     """A text adventure game class storing all location, item and map data.
 
     Instance Attributes:
-        - _locations: A dictionary mapping location IDs to Location objects, representing all locations in the game.
-        - _items: A list of Item objects, representing all items that exist in the game world.
         - current_location_id: The ID of the player's current location.
         - ongoing: A boolean indicating whether the game is still in progress (True) or has ended (False).
         - inventory: A list of Item objects that the player has collected.
