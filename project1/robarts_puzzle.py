@@ -4,7 +4,7 @@ import pygame
 pygame.init()
 
 
-def display_text():
+def display_puzzle10():
     """Displays the word scramble puzzle and handles user input."""
     # Set up the game window
     screen_width, screen_height = 400, 500
@@ -77,6 +77,3 @@ def display_text():
         clock.tick(30)  # Set the frame rate to 30 FPS
 
     pygame.quit()
-
-
-display_text()
