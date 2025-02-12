@@ -142,18 +142,16 @@ if __name__ == "__main__":
         'disable': ['R1705', 'E9998', 'E9999']
     })
 
-    # TODO: Modify the code below to provide a walkthrough of commands needed to win and lose the game
-    #win_walkthrough = ["go east", "look", "take", "go west", "go west", "go west", "go north", "look", "pick up",
-                  #     "go south", "go south", "look", "check", "go north", "go east", "deposit"]
-    # Create a list of all the commands needed to walk through your game to win it
+    win_walkthrough = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee', 'go west',
+                       'go north', 'look', 'pick up', 'lock in', 'go south', 'go south', 'look', 'check', 'keyboard',
+                       'go east', 'look', 'buy', '21', 'go north', 'go east', 'submit assignment']
     expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
-    # Update expected_log list to include the IDs of all locations that would be visited
-    # Uncomment the line below to test your walkthrough
     sim = AdventureGameSimulation('game_data.json', 1, win_walkthrough)
     assert expected_log == sim.get_id_log()
 
-    # Create a list of all the commands needed to walk through your game to reach a 'game over' state
-    lose_demo = []
+    lose_demo = ['go east', 'go west', 'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north',
+                 'go west', 'go north', 'go south', 'go south', 'go east', 'go north', 'go east', 'go east', 'go west',
+                 'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north']
     expected_log = []  # Update this log list to include the IDs of all locations that would be visited
     # Uncomment the line below to test your demo
     sim = AdventureGameSimulation('game_data.json', 1, lose_demo)
@@ -162,17 +160,17 @@ if __name__ == "__main__":
     # TODO: Add code below to provide walkthroughs that show off certain features of the game
     # TODO: Create a list of commands involving visiting locations, picking up items, and then
     #   checking the inventory, your list must include the "inventory" command at least once
-    # inventory_demo = [..., "inventory", ...]
-    # expected_log = []
-    # assert expected_log == AdventureGameSimulation(...)
+    inventory_demo = [..., "inventory", ...]
+    expected_log = []
+    assert expected_log == AdventureGameSimulation(...)
 
-    # scores_demo = [..., "score", ...]
-    # expected_log = []
-    # assert expected_log == AdventureGameSimulation(...)
+    scores_demo = [..., "score", ...]
+    expected_log = []
+    assert expected_log == AdventureGameSimulation(...)
 
     # Add more enhancement_demos if you have more enhancements
-    # enhancement1_demo = [...]
-    # expected_log = []
-    # assert expected_log == AdventureGameSimulation(...)
+    enhancement_puzzle_demo = [...]
+    expected_log = []
+    assert expected_log == AdventureGameSimulation(...)
 
     # Note: You can add more code below for your own testing purposes

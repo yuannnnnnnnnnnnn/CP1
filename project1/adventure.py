@@ -251,9 +251,24 @@ class AdventureGame:
         """Display the current score"""
         print(f"Your current score is: {self.score}")
 
-    def undo(self):
+    def undo_stuff(self):
         """Undo the last command or any action related to the game"""
+        current_location = self.get_location(self.current_location_id)  # current_location.id_num will print 30
+        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        item_name = location.items[0]
+        if game_log.is_move_function == False:
 
+                if self.inventory:
+                    self.item_dict = {item.name: item for item in self._items}
+                    # If the inventory is not empty, remove the last item
+                    item = self.inventory.pop()  # Remove the latest added item
+                    self.score += self.item_dict[item_name].target_points
+                    print(f"Removed {item} from your inventory. Your score is now {self.score}.")
+                else:
+                    print("No items to remove from inventory.")
+
+            #elif self.event_list.current.next_command == 'check':
+                print("Undoing a 'check' action. No item removed.")
 
     def submit_assignment(self):
         """Deposit """
@@ -269,6 +284,7 @@ class AdventureGame:
         else:
             print("Try again! You haven't reach 250 points!")
         self.ongoing = False
+
 
 if __name__ == "__main__":
 
@@ -374,8 +390,14 @@ if __name__ == "__main__":
                 game.show_inventory()
             elif choice == "score":
                 game.show_score()
-            # elif choice == "undo":
-            #     game_log.
+            elif choice == "undo":
+                current_location = game.get_location()
+                if game_log.is_move_function == True:
+                    game_log.undo_event()
+                    game.current_location_id = game_log.current.id_num
+                else:
+                    print('third goin in')
+                    game.undo_stuff()
             elif choice == 'pick up':
                 game.pick_item()
             elif choice == 'buy':
@@ -410,5 +432,4 @@ if __name__ == "__main__":
 
             # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
 
-        # if
-            # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
+        # if meow

@@ -75,12 +75,16 @@ class EventList:
     # idk is representation invariants are right... must change later meow
     first: Optional[Event]
     last: Optional[Event]
+    current: Optional[Event]
+    is_move_function: bool
 
     def __init__(self) -> None:
         """Initialize a new empty event list."""
 
         self.first = None
         self.last = None
+        self.current = None
+        self.is_move_function = True
 
     def display_events(self) -> None:
         """Display all events in chronological order.
@@ -113,6 +117,7 @@ class EventList:
             curr.next = event
             event.prev = curr
             curr.next_command = command
+        self.current = event
 
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
@@ -140,6 +145,35 @@ class EventList:
             curr = curr.next
 
         return items_so_far
+
+    def undo_event(self) -> None:
+        """Undo the last move or inventory-related action."""
+
+        if self.current is None:
+            print("No events have been visited yet.")
+
+        # Check if there's a previous event to go back to
+        elif self.current.prev is not None:
+            # Check if the last command was one of the move functions (go north, go south, etc.)
+            if self.current.next_command in ['go north', 'go south', 'go east', 'go west']:
+                self.is_move_function = True  # Mark this as a move event
+                # If the last action was a move, go back to the previous event
+                self.current = self.current.prev  # Move back
+
+                #         print(f"Undo: Returned to event {self.current.id_num}: {self.current.description}"
+            else:
+                # add the preconditions
+                # self.event_list.current = self.event_list.current.prev
+                # print(f"Returned to event {self.event_list.current.id_num}: {self.event_list.current.description}")
+
+                self.is_move_function = False  # It's not a move event
+                # If it's an inventory-related action, handle it differently
+                # print(f"Undoing inventory action from event {self.current.id_num}: {self.current.description}")
+
+                # Call the game logic to handle inventory-related undo
+
+        else:
+            print("No previous events to undo.")  # fix this
 
     # Note: You may add other methods to this class as needed
 
