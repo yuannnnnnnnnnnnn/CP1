@@ -177,7 +177,7 @@ class AdventureGame:
                 if current_location.id_num == 20:  # Ensure there's an item to buy
 
                     if display_puzzle1():
-                        item = current_location.items[0]  # Get the first item from the list of items
+                        item = current_location.items[0]  # item = Ramen
                         self.inventory.append(item)  # Add the item to inventory
                         self.score += self.item_dict[item_name].target_points
                         print(f"You bought {item}. It has been added to your inventory.")
