@@ -23,7 +23,8 @@ from typing import Optional
 
 from game_entities import Location, Item
 from proj1_event_logger import Event, EventList
-from project1.new_college_puzzle import display_text
+from project1.new_college_puzzle import display_puzzle1
+from project1.kungfutea_puzzle import display_puzzle2
 
 
 # Note: You may add in other import statements here as needed
@@ -61,6 +62,7 @@ class AdventureGame:
     ongoing: bool  # Suggested attribute, can be removed
     inventory: list[Item]
     score: int
+    move: int
 
     def __init__(self, game_data_file: str, initial_location_id: int) -> None:
         """
@@ -87,6 +89,7 @@ class AdventureGame:
         self.ongoing = True  # whether the game is ongoing
         self.inventory = []
         self.score = 0
+        self.move = 0
 
     @staticmethod
     def _load_game_data(filename: str) -> tuple[dict[int, Location], list[Item]]:
@@ -165,10 +168,18 @@ class AdventureGame:
             if current_location.items:
                 if current_location.id_num == 20:  # Ensure there's an item to buy
 
-                    if display_text():
+                    if display_puzzle1():
                         item = current_location.items[0]  # Get the first item from the list of items
                         self.inventory.append(item)  # Add the item to inventory
                         self.score += self.item_dict[item_name].target_points
+                        print(f"You bought {item}. It has been added to your inventory.")
+                    else:
+                        print("You couldn't solve the Ramen puzzle.")
+                elif current_location.id_num == 30:
+                    if display_puzzle2():
+                        item = current_location.items[0]
+                        self.inventory.append(item)
+                        self.score = self.item_dict[item_name].target_points
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Ramen puzzle.")
@@ -222,6 +233,11 @@ class AdventureGame:
         """Display the current score"""
         print(f"Your current score is: {self.score}")
 
+    # def undo(self):
+    #     """Undo the last command or any action related to the game"""
+    #     if location.id_num == 10:
+
+
 
 if __name__ == "__main__":
 
@@ -236,8 +252,9 @@ if __name__ == "__main__":
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
-    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check", "take"]  # Regular menu options available at each location
+    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check", "take", "move"]  # Regular menu options available at each location
     choice = None
+
 
     # Note: You may modify the code below as needed; the following starter code is just a suggestion
     while game.ongoing:
@@ -247,13 +264,14 @@ if __name__ == "__main__":
         location = game.get_location()
 
         # TODO: Add new Event to game log to represent current game location
-        if game_log.first is None:
-            choice = None
-        else:
-            choice = game_log.last.next_command
+        # if game_log.first is None:
+        #     choice = None
+        # else:
+        #     choice = game_log.last.next_command
 
         new_event = Event(id_num=location.id_num, description=location.brief_description, next_command=choice,
                           next=None, prev=None)
+        game_log.add_event(new_event)
         #  Note that the <choice> variable should be the command which led to this event
         # YOUR CODE HERE
 
@@ -315,18 +333,27 @@ if __name__ == "__main__":
             elif choice == 'no':
                 pass
             elif choice == "quit":
-                break
+                game.ongoing = False
+                exit()
             elif choice == "take":
                 game.take_item()
             elif choice == 'check':
                 game.check_item()
+            elif choice == 'move':
+                print(game.move)
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
         else:
             # Handle non-menu actions
             result = location.available_commands[choice]
             game.current_location_id = result
+            game.move += 1
 
             # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
 
         # if
             # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
+
+        if game.move <= 30:
+            if game.score >= 225:
+                if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
+                    print("Congratulations you have won the game")
