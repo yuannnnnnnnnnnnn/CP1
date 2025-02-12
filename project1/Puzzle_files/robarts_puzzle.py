@@ -1,115 +1,29 @@
-# import pygame
-#
-# pygame.init()
-# pygame.font.init()
-#
-# def display_puzzle10():
-#     """Displays the word scramble puzzle and handles user input."""
-#     # Set up the game window
-#     screen_width, screen_height = 400, 500
-#     screen = pygame.display.set_mode((screen_width, screen_height))
-#     pygame.display.set_caption("Cipher Puzzle")
-#
-#     # Load and resize image
-#     chef_image = pygame.image.load("Images/cipher_puzzle.png")
-#     chef_image = pygame.transform.scale(chef_image, (400, 500))  # Adjust size as needed
-#     chef_x = (screen_width - chef_image.get_width()) // 2
-#     chef_y = (screen_height - chef_image.get_height()) // 2
-#
-#     # Define the font
-#     font_size = 30
-#     font = pygame.font.SysFont(None, font_size)
-#     input_font = pygame.font.SysFont(None, 40)  # Font for the input text
-#     clock = pygame.time.Clock()
-#
-#     correct_answer = "lock in"  # Correct answer for the puzzle
-#     user_input = ""  # Input that user types
-#     input_active = False  # State if the input box is active or not
-#     message = ""  # Message to show result feedback
-#
-#     running = True
-#     success = False
-#
-#     while running:
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-#
-#             if event.type == pygame.MOUSEBUTTONDOWN:
-#                 # Check if input box is clicked
-#                 if 50 <= pygame.mouse.get_pos()[0] <= screen_width - 50 and screen_height - 70 <= pygame.mouse.get_pos()[1] <= screen_height - 30:
-#                     input_active = True
-#                 else:
-#                     input_active = False
-#
-#             if event.type == pygame.KEYDOWN:
-#                 if input_active:
-#                     if event.key == pygame.K_BACKSPACE:
-#                         user_input = user_input[:-1]  # Remove last character
-#                     elif event.key == pygame.K_RETURN:
-#                         if user_input.lower() == correct_answer:
-#                             message = "Correct! You get the USB Drive!"
-#                             success = True
-#                             # Close the puzzle window and exit
-#                             running = False  # Stop the loop to exit the puzzle
-#                         else:
-#                             message = "Wrong! Try again."
-#                             success = False
-#                         user_input = ""  # Clear input after pressing enter
-#                     else:
-#                         user_input += event.unicode  # Add typed character to input
-#
-#         # Fill the screen with black
-#         screen.fill((0, 0, 0))
-#
-#         # Draw the image onto the screen
-#         screen.blit(chef_image, (chef_x, chef_y))
-#
-#         # Draw the input box
-#         input_box = pygame.Rect(50, screen_height - 65, screen_width - 100, 40)
-#         pygame.draw.rect(screen, (255, 255, 255), input_box, 2)
-#
-#         # Render the user's typed text in the input box
-#         input_text_surface = input_font.render(user_input, True, (0, 0, 0))
-#         screen.blit(input_text_surface, (input_box.x + 10, input_box.y + 5))  # Position the text inside the box
-#
-#         # Display feedback message
-#         if message:
-#             message_surface = font.render(message, True, (0, 255, 0) if message.startswith("Correct") else (255, 0, 0))  # Green for correct, red for wrong
-#             screen.blit(message_surface, (screen_width // 2 - message_surface.get_width() // 2, screen_height - 110))
-#
-#         pygame.display.flip()  # Update the display
-#         clock.tick(30)  # Set the frame rate to 30 FPS
-#
-#     pygame.quit()
-#     return success
+"""Puzzle file related to Robart Library location"""
 
 import pygame
 
-pygame.init()  # Initialize Pygame
+pygame.init()
 pygame.font.init()
+
 
 def display_puzzle10():
     """Displays the cipher puzzle and handles user input."""
-    # Set up the game window
     screen_width, screen_height = 400, 500
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Cipher Puzzle")
 
-    # Load and resize image (with error handling)
     try:
         chef_image = pygame.image.load("Images/cipher_puzzle.png")
         chef_image = pygame.transform.scale(chef_image, (400, 500))
     except pygame.error:
         print("Error: Could not load image.")
-        return False  # Return False if image fails to load
+        return False
 
     chef_x = (screen_width - chef_image.get_width()) // 2
     chef_y = (screen_height - chef_image.get_height()) // 2
 
-    # Define fonts
     font_size = 30
-    font = pygame.font.SysFont(None, font_size)  # Ensure Pygame fonts are initialized
+    font = pygame.font.SysFont(None, font_size)
     input_font = pygame.font.SysFont(None, 40)
 
     clock = pygame.time.Clock()
@@ -126,7 +40,7 @@ def display_puzzle10():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                return False  # Exit the game and return False
+                return False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if 50 <= pygame.mouse.get_pos()[0] <= screen_width - 50 and screen_height - 70 <= pygame.mouse.get_pos()[1] <= screen_height - 30:
@@ -141,27 +55,23 @@ def display_puzzle10():
                     if user_input.lower() == correct_answer:
                         message = "Correct! You get the USB Drive!"
                         success = True
-                        running = False  # Stop the loop to exit the puzzle
+                        running = False
                     else:
                         message = "Wrong! Try again."
                         success = False
-                    user_input = ""  # Clear input after pressing enter
+                    user_input = ""
                 else:
                     user_input += event.unicode
 
-        # Fill screen
         screen.fill((0, 0, 0))
         screen.blit(chef_image, (chef_x, chef_y))
 
-        # Draw input box
         input_box = pygame.Rect(50, screen_height - 65, screen_width - 100, 40)
         pygame.draw.rect(screen, (255, 255, 255), input_box, 2)
 
-        # Render user input
         input_text_surface = input_font.render(user_input, True, (0, 0, 0))
         screen.blit(input_text_surface, (input_box.x + 10, input_box.y + 5))
 
-        # Display feedback message
         if message:
             message_surface = font.render(message, True, (0, 255, 0) if success else (255, 0, 0))
             screen.blit(message_surface, (screen_width // 2 - message_surface.get_width() // 2, screen_height - 110))
@@ -169,5 +79,5 @@ def display_puzzle10():
         pygame.display.flip()
         clock.tick(30)
 
-    pygame.display.quit()  # ✅ Only closes the window
+    pygame.display.quit()
     return success
