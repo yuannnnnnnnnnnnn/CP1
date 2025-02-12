@@ -253,6 +253,9 @@ class AdventureGame:
     #     """Undo the last command or any action related to the game"""
     #     if location.id_num == 10:
 
+    def deposit(self):
+        """When the three """
+
 
 
 if __name__ == "__main__":
@@ -304,7 +307,7 @@ if __name__ == "__main__":
         for action in location.available_commands:
             print("-", action)
         if location.id_num == 50:
-            if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
+            if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']) and game.score >= 250:
                 print("And you can also:")
 
                 # Ensure available_actions exist before looping
