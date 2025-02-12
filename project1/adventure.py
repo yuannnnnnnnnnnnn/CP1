@@ -23,6 +23,7 @@ from typing import Optional
 
 from game_entities import Location, Item
 from proj1_event_logger import Event, EventList
+from project1.Puzzle_files.MP_puzzle import display_puzzle70
 from project1.Puzzle_files.apt_puzzle import display_puzzle60
 from project1.Puzzle_files.new_college_puzzle import display_puzzle1
 from project1.Puzzle_files.kungfutea_puzzle import display_puzzle2
@@ -172,7 +173,7 @@ class AdventureGame:
         item_name = location.items[0]
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
-            if current_location.items:
+           # if current_location.items:
                 if location.id_num == 20:  # Ensure there's an item to buy
                     if display_puzzle1():
                         item = current_location.items[0]  # item = Ramen
@@ -185,7 +186,7 @@ class AdventureGame:
                     if display_puzzle2():
                         item = current_location.items[0]
                         self.inventory.append(item)
-                        self.score = self.item_dict[item_name].target_points
+                        self.score += self.item_dict[item_name].target_points
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Bubble Tea puzzle.")
@@ -234,8 +235,11 @@ class AdventureGame:
             if current_location.items:  # Ensure there's an item to buy
                 item = current_location.items[0]  # Get the first item from the list of items
                 if item not in self.inventory:
-                    self.inventory.append(item)  # Add the item to inventory
-                    self.score += self.item_dict[item_name].target_points
+                    if display_puzzle70():
+                        self.inventory.append(item)  # Add the item to inventory
+                        self.score += self.item_dict[item_name].target_points
+                    else:
+                        print("You can't solve the puzzles")
                 # self.score += item.target_points
                     print(f"You checked {item}. It has been added to your inventory.")
                 else:
@@ -251,10 +255,20 @@ class AdventureGame:
     #     """Undo the last command or any action related to the game"""
     #     if location.id_num == 10:
 
-    def deposit(self):
-        """When the three """
+    def submit_assignment(self):
+        """Deposit """
+        if self.score >= 250:
+            if self.move <= 25:
+                if all(item in self.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
+                    print("Congratulations you have won the game")
 
-
+                else:
+                    print("Try again! You didn't collect all three required items!")
+            else:
+                print("Try again! You exceeded your maximum move!")
+        else:
+            print("Try again! You haven't reach 250 points!")
+        self.ongoing = False
 
 if __name__ == "__main__":
 
@@ -269,7 +283,7 @@ if __name__ == "__main__":
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
-    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "deposit", "no", "pick up", "check", "take"]  # Regular menu options available at each location
+    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "submit assignment", "no", "pick up", "check", "take"]  # Regular menu options available at each location
     choice = None
 
 
@@ -307,15 +321,31 @@ if __name__ == "__main__":
         if location.id_num == 50:
             if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']) and game.score >= 250:
                 print("And you can also:")
-
+                print("what if it's this one")
                 # Ensure available_actions exist before looping
                 if location.available_actions:
                     for moves, available in location.available_actions.items():
                         print("-", moves)
+        # elif location.id_num == 70 or location.id_num == 10 or location.id_num == 60:
+        #     print("is this going in ")
+        #     print(game.inventory)
+        #     print(location.items)
+        #     if location.items not in game.inventory: #and all(item in game.inventory for item in location.items):
+        #     #     pass
+        #         print("And you can also:")
+        #
+        #     # Ensure available_actions exist before looping
+        #     # if location.available_actions:
+        #         for moves, available in location.available_actions.items():
+        #             print("-", moves)
+
+            # else:
+            #     print(location.items)
+            #     print("This item has been retrived")
         else:
-            if location.items and all(item in game.inventory for item in location.items):
-                pass
-            else:
+            # if location.items and all(item in game.inventory for item in location.items):
+            #     pass
+            # else:
                 print("And you can also:")
 
                 # Ensure available_actions exist before looping
@@ -361,6 +391,8 @@ if __name__ == "__main__":
                 game.check_item()
             # elif choice == 'move':
             #     print(game.move)
+            elif choice == 'submit assignment':
+                game.submit_assignment()
             # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
         else:
             # Handle non-menu actions
@@ -368,11 +400,13 @@ if __name__ == "__main__":
             game.current_location_id = result
             game.move += 1
 
-        if game.score >= 250:
-            if game.move <= 30:
-                if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
-                    print("Congratulations you have won the game")
-                    game.ongoing = False
+        if game.move >= 25:
+            print("Try again! You have exceeded your maximum move!")
+            game.ongoing = False
+            print("update  skdfksjfdsfshmore")
+        elif game.score < 0:
+            print("Try again! Your score is negative.")
+            game.ongoing = False
 
             # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
 

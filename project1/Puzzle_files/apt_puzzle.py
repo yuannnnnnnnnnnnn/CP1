@@ -19,6 +19,9 @@ def display_puzzle60():
 
     # Define the font
     font_size = 30
+    if not pygame.font.get_init():
+        pygame.font.init()
+
     font = pygame.font.SysFont(None, font_size)
     input_font = pygame.font.SysFont(None, 40)  # Font for the input text
     clock = pygame.time.Clock()
@@ -81,5 +84,5 @@ def display_puzzle60():
         pygame.display.flip()  # Update the display
         clock.tick(30)  # Set the frame rate to 30 FPS
 
-    pygame.quit()
+    pygame.display.quit()  # ✅ Only closes the window
     return success

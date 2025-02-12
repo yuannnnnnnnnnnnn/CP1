@@ -81,5 +81,5 @@ def display_puzzle1():
         pygame.display.flip()  # Update the display
         clock.tick(30)  # Set the frame rate to 30 FPS
 
-    pygame.quit()
+    pygame.display.quit()  # ✅ Only closes the window
     return success

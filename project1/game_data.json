@@ -71,7 +71,7 @@
         "go west": 30
       },
       "available_actions": {
-        "deposit": true,
+        "submit assignment": true,
         "no": false
       },
       "items": [""]
