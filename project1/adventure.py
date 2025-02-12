@@ -251,9 +251,9 @@ class AdventureGame:
         """Display the current score"""
         print(f"Your current score is: {self.score}")
 
-    # def undo(self):
-    #     """Undo the last command or any action related to the game"""
-    #     if location.id_num == 10:
+    def undo(self):
+        """Undo the last command or any action related to the game"""
+
 
     def submit_assignment(self):
         """Deposit """
@@ -412,5 +412,3 @@ if __name__ == "__main__":
 
         # if
             # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
-
-            print("updat ethis code ")
