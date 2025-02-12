@@ -1,4 +1,5 @@
-"""CSC111 Project 1: Text Adventure Game - Game Manager
+"""CSC111 Project 1:
+ Text Adventure Game - Game Manager
 
 Instructions (READ THIS FIRST!)
 ===============================
@@ -31,11 +32,6 @@ from project1.Puzzle_files.robarts_puzzle import display_puzzle10
 from project1.Puzzle_files.uoft_bookstore_puzzle import display_puzzle40
 
 
-# Note: You may add in other import statements here as needed
-
-# Note: You may add helper functions, classes, etc. below as needed
-
-
 class AdventureGame:
     """A text adventure game class storing all location, item and map data.
 
@@ -52,11 +48,6 @@ class AdventureGame:
         - self.current_location_id in self._locations
     """
     # lines 43 - 48 were provided by ChatGPT (DO BE EDITED)
-
-    # Private Instance Attributes (do NOT remove these two attributes):
-    #   - _locations: a mapping from location id to Location object.
-    #                       This represents all the locations in the game.
-    #   - _items: a list of Item objects, representing all items in the game.
 
     _locations: dict[int, Location]
     _items: list[Item]
@@ -75,20 +66,11 @@ class AdventureGame:
         Preconditions:
         - game_data_file is the filename of a valid game data JSON file
         """
-        # NOTES:
-        # You may add parameters/attributes/methods to this class as you see fit.
 
-        # Requirements:
-        # 1. Make sure the Location class is used to represent each location.
-        # 2. Make sure the Item class is used to represent each item.
-
-        # Suggested helper method (you can remove and load these differently if you wish to do so):
         self._locations, self._items = self._load_game_data(game_data_file)
-        # self._items = []  # eh I don't know if this is right, but I made the change
 
-        # Suggested attributes (you can remove and track these differently if you wish to do so):
-        self.current_location_id = initial_location_id  # game begins at this location
-        self.ongoing = True  # whether the game is ongoing
+        self.current_location_id = initial_location_id
+        self.ongoing = True
         self.inventory = []
         self.score = 0
         self.move = 0
@@ -103,7 +85,7 @@ class AdventureGame:
             data = json.load(f)  # This loads all the data from the JSON file
 
         locations = {}
-        for loc_data in data.get('locations', []):  # Go through each element associated with the 'locations' key in the file
+        for loc_data in data.get('locations', []):
             location_obj = Location(loc_data['id'], loc_data['brief_description'], loc_data['long_description'],
                                     loc_data['available_commands'], loc_data['items'],
                                     available_actions=loc_data.get('available_actions', {}))
@@ -114,8 +96,6 @@ class AdventureGame:
             item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'],
                             item_data['target_position'], item_data['target_points'])
             items.append(item_obj)
-        # TODO: Add Item objects to the items list; your code should be structured similarly to the loop above
-        # YOUR CODE BELOW
 
         return locations, items
 
@@ -123,9 +103,6 @@ class AdventureGame:
         """Return Location object associated with the provided location ID.
         If no ID is provided, return the Location object associated with the current location.
         """
-
-        # TODO: Complete this method as specified
-        # YOUR CODE BELOW
         if loc_id is None:
             return self._locations[self.current_location_id]
         else:
@@ -149,7 +126,6 @@ class AdventureGame:
 
         if "pick up" in current_location.available_actions and current_location.available_actions["pick up"]:
             if current_location.items:  # Ensure there's an item to pick up
-
                 if current_location.id_num == 10:
                     item = current_location.items[0]
                     if item not in self.inventory:
@@ -159,58 +135,51 @@ class AdventureGame:
                             self.score += self.item_dict[item_name].target_points
                             print(f"You picked up {item}. It has been added to your inventory.")
                         else:
-                            print("You couldn't solve the Ramen puzzle.")
+                            print("You couldn't solve the puzzle.")
                     else:
                         print("This item has already been retrieved. Move along~")
                 else:
-                    print("There is nothing to pick up here.")
+                    print("There is nothing to retrieve here.")
 
     def buy_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
-        # Check if the 'buy' action is available at the current location
-        current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
-        self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
+        current_location = self.get_location(self.current_location_id)
+        self.item_dict = {item.name: item for item in self._items}
         item_name = location.items[0]
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
-           # if current_location.items:
-                if location.id_num == 20:  # Ensure there's an item to buy
-                    if display_puzzle1():
-                        item = current_location.items[0]  # item = Ramen
-                        self.inventory.append(item)  # Add the item to inventory
-                        self.score += self.item_dict[item_name].target_points
-                        print(f"You bought {item}. It has been added to your inventory.")
-                    else:
-                        print("You couldn't solve the Ramen puzzle.")
-                elif location.id_num == 30:
-                    if display_puzzle2():
-                        item = current_location.items[0]
-                        self.inventory.append(item)
-                        self.score += self.item_dict[item_name].target_points
-                        print(f"You bought {item}. It has been added to your inventory.")
-                    else:
-                        print("You couldn't solve the Bubble Tea puzzle.")
-                elif location.id_num == 40:
-                    if display_puzzle40():
-                        item = current_location.items[0]
-                        self.inventory.append(item)
-                        self.score += self.item_dict[item_name].target_points
-                        print(f"You bought {item}. It has been added to your inventory.")
-                    else:
-                        print("You couldn't solve the Lip Gloss puzzle.")
-
-            # else:
-            #     print("There is nothing to buy here.")
+            if location.id_num == 20:  # Ensure there's an item to buy
+                if display_puzzle1():
+                    item = current_location.items[0]  # item = Ramen
+                    self.inventory.append(item)  # Add the item to inventory
+                    self.score += self.item_dict[item_name].target_points
+                    print(f"You bought {item}. It has been added to your inventory.")
+                else:
+                    print("You couldn't solve the Ramen puzzle.")
+            elif location.id_num == 30:
+                if display_puzzle2():
+                    item = current_location.items[0]
+                    self.inventory.append(item)
+                    self.score += self.item_dict[item_name].target_points
+                    print(f"You bought {item}. It has been added to your inventory.")
+                else:
+                    print("You couldn't solve the Bubble Tea puzzle.")
+            elif location.id_num == 40:
+                if display_puzzle40():
+                    item = current_location.items[0]
+                    self.inventory.append(item)
+                    self.score += self.item_dict[item_name].target_points
+                    print(f"You bought {item}. It has been added to your inventory.")
+                else:
+                    print("You couldn't solve the Lip Gloss puzzle.")
 
     def take_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
-        # Check if the 'buy' action is available at the current location
         current_location = self.get_location(self.current_location_id)  # current_location.id_num will print 30
         self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
         item_name = location.items[0]
 
         if "take" in current_location.available_actions and current_location.available_actions["take"]:
-            # if current_location.items:  # Ensure there's an item to buy
             item = current_location.items[0]
             if item not in self.inventory:
                 if display_puzzle60():
@@ -226,7 +195,6 @@ class AdventureGame:
 
     def check_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
-        # Check if the 'buy' action is available at the current location
         current_location = self.get_location(self.current_location_id) #current_location.id_num will print 30
         self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
         item_name = location.items[0]
@@ -257,18 +225,16 @@ class AdventureGame:
         self.item_dict = {item.name: item for item in self._items}  # Store items in a dictionary
         item_name = location.items[0]
         if game_log.is_move_function == False:
+            if self.inventory:
+                self.item_dict = {item.name: item for item in self._items}
+                # If the inventory is not empty, remove the last item
+                item = self.inventory.pop()  # Remove the latest added item
+                self.score += self.item_dict[item_name].target_points
+                print(f"Removed {item} from your inventory. Your score is now {self.score}.")
+            else:
+                print("No items to remove from inventory.")
 
-                if self.inventory:
-                    self.item_dict = {item.name: item for item in self._items}
-                    # If the inventory is not empty, remove the last item
-                    item = self.inventory.pop()  # Remove the latest added item
-                    self.score += self.item_dict[item_name].target_points
-                    print(f"Removed {item} from your inventory. Your score is now {self.score}.")
-                else:
-                    print("No items to remove from inventory.")
-
-            #elif self.event_list.current.next_command == 'check':
-                print("Undoing a 'check' action. No item removed.")
+            print("Undoing a 'check' action. No item removed.")
 
     def submit_assignment(self):
         """Deposit """
@@ -288,9 +254,6 @@ class AdventureGame:
 
 if __name__ == "__main__":
 
-    # When you are ready to check your work with python_ta, uncomment the following lines.
-    # (Delete the "#" and space before each line.)
-    # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 120,
@@ -299,35 +262,16 @@ if __name__ == "__main__":
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
-    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "submit assignment", "no", "pick up", "check", "take"]  # Regular menu options available at each location
+    menu = ["look", "inventory", "score", "undo", "log", "quit", "buy", "submit assignment", "no",
+            "pick up", "check", "take"]  # Regular menu options available at each location
     choice = None
 
-
-    # Note: You may modify the code below as needed; the following starter code is just a suggestion
     while game.ongoing:
-        # Note: If the loop body is getting too long, you should split the body up into helper functions
-        # for better organization. Part of your marks will be based on how well-organized your code is.
-
         location = game.get_location()
-
-        # TODO: Add new Event to game log to represent current game location
-        # if game_log.first is None:
-        #     choice = None
-        # else:
-        #     choice = game_log.last.next_command
 
         new_event = Event(id_num=location.id_num, description=location.brief_description, next_command=choice,
                           next=None, prev=None)
         game_log.add_event(new_event)
-        #  Note that the <choice> variable should be the command which led to this event
-        # YOUR CODE HERE
-
-        # TODO: Depending on whether or not it's been visited before,
-        #  print either full description (first time visit) or brief description (every subsequent visit) of location
-        # YOUR CODE HERE
-
-        # Display possible actions at this location
-
 
         print(location.brief_description)
         print("What would you like to do? Choose from: look, inventory, score, undo, log, quit")
@@ -338,38 +282,16 @@ if __name__ == "__main__":
             if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']) and game.score >= 250:
                 print("And you can also:")
                 print("what if it's this one")
-                # Ensure available_actions exist before looping
                 if location.available_actions:
                     for moves, available in location.available_actions.items():
                         print("-", moves)
-        # elif location.id_num == 70 or location.id_num == 10 or location.id_num == 60:
-        #     print("is this going in ")
-        #     print(game.inventory)
-        #     print(location.items)
-        #     if location.items not in game.inventory: #and all(item in game.inventory for item in location.items):
-        #     #     pass
-        #         print("And you can also:")
-        #
-        #     # Ensure available_actions exist before looping
-        #     # if location.available_actions:
-        #         for moves, available in location.available_actions.items():
-        #             print("-", moves)
-
-            # else:
-            #     print(location.items)
-            #     print("This item has been retrived")
         else:
-            # if location.items and all(item in game.inventory for item in location.items):
-            #     pass
-            # else:
-                print("And you can also:")
+            print("And you can also:")
 
-                # Ensure available_actions exist before looping
-                if location.available_actions:
-                    for moves, available in location.available_actions.items():
-                        print("-", moves)
+            if location.available_actions:
+                for moves, available in location.available_actions.items():
+                    print("-", moves)
 
-        # Validate choice
         choice = input("\nEnter action: ").lower().strip()
         while choice not in location.available_commands and choice not in menu:
             print("That was an invalid option; try again.")
@@ -379,12 +301,10 @@ if __name__ == "__main__":
         print("You decided to:", choice)
 
         if choice in menu:
-            # TODO: Handle each menu command as appropriate
-            # Note: For the "undo" command, remember to manipulate the game_log event list to keep it up-to-date
             if choice == "log":
                 game_log.display_events()
             elif choice == "look":
-                current_location = game.get_location()  # Get the current location
+                current_location = game.get_location()
                 print(current_location.long_description)
             elif choice == "inventory":
                 game.show_inventory()
@@ -411,13 +331,9 @@ if __name__ == "__main__":
                 game.take_item()
             elif choice == 'check':
                 game.check_item()
-            # elif choice == 'move':
-            #     print(game.move)
             elif choice == 'submit assignment':
                 game.submit_assignment()
-            # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
         else:
-            # Handle non-menu actions
             result = location.available_commands[choice]
             game.current_location_id = result
             game.move += 1
@@ -429,7 +345,3 @@ if __name__ == "__main__":
         elif game.score < 0:
             print("Try again! Your score is negative.")
             game.ongoing = False
-
-            # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
-
-        # if meow

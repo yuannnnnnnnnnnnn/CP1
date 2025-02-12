@@ -45,17 +45,12 @@ class Location:
     available_commands: dict[str, int]
     available_actions: dict[str, bool]
 
-    # This is just a suggested starter class for Location.
-    # You may change/add parameters and the data available for each Location object as you see fit.
-    #
     # The only thing you must NOT change is the name of this class: Location.
     # All locations in your game MUST be represented as an instance of this class.
 
     def __init__(self, location_id, brief_description, long_description, available_commands, items,
                  visited=False, available_actions=None) -> None:
         """Initialize a new location.
-
-        # TODO Add more details here about the initialization if needed
         """
 
         self.id_num = location_id
@@ -98,11 +93,6 @@ class Item:
     target_position: int
     target_points: int
 
-
-# Note: Other entities you may want to add, depending on your game plan:
-# - Puzzle class to represent special locations (could inherit from Location class if it seems suitable)
-# - Player class
-# etc.
 
 if __name__ == "__main__":
     pass

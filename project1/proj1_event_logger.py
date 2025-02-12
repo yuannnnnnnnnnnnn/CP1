@@ -39,26 +39,11 @@ class Event:
     - prev: Event object representing the previous event in the game, None if this is the first game event
     """
 
-    # NOTES:
-    # This is proj1_event_logger (separate from the ex1 file). In this file, you may add new attributes/methods,
-    # or modify the names or types of provided attributes/methods, as needed for your game.
-    # If you want to create a special type of Event for your game that requires a different
-    # set of attributes, you can create new classes using inheritance, as well.
-
     id_num: int
     description: str
     next_command: Optional[str] = None
     next: Optional[Event] = None
     prev: Optional[Event] = None
-
-    # def __init__(self, id_num, command=None):
-    #     """
-    #     Initialize an event with a location ID and an optional command.
-    #     """
-    #     self.id_num = id_num  # Location ID
-    #     self.next_command = command  # Command that led to this event
-    #     self.next = None  # Pointer to the next event, default is None
-    #     self.prev = None
 
 
 class EventList:
@@ -94,7 +79,6 @@ class EventList:
             print(f"Location: {curr.id_num}, Command: {curr.next_command}")
             curr = curr.next
 
-    # TODO: Complete the methods below, based on the given descriptions.
     def is_empty(self) -> bool:
         """Return whether this event list is empty."""
         return self.first is None
@@ -104,8 +88,6 @@ class EventList:
         The given command is the command which was used to reach this new event, or None if this is the first
         event in the game.
         """
-        # Hint: You should update the previous node's <next_command> as needed
-
         if self.first is None:
             self.first = event
             event.next_command = command
@@ -122,10 +104,7 @@ class EventList:
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
         If the list is empty, do nothing."""
-
-        # Hint: The <next_command> and <next> attributes for the new last event should be updated as needed
         curr = self.first
-
         if curr is None:
             return
 
@@ -152,37 +131,18 @@ class EventList:
         if self.current is None:
             print("No events have been visited yet.")
 
-        # Check if there's a previous event to go back to
         elif self.current.prev is not None:
-            # Check if the last command was one of the move functions (go north, go south, etc.)
             if self.current.next_command in ['go north', 'go south', 'go east', 'go west']:
-                self.is_move_function = True  # Mark this as a move event
-                # If the last action was a move, go back to the previous event
-                self.current = self.current.prev  # Move back
-
-                #         print(f"Undo: Returned to event {self.current.id_num}: {self.current.description}"
+                self.is_move_function = True
+                self.current = self.current.prev
             else:
-                # add the preconditions
-                # self.event_list.current = self.event_list.current.prev
-                # print(f"Returned to event {self.event_list.current.id_num}: {self.event_list.current.description}")
-
-                self.is_move_function = False  # It's not a move event
-                # If it's an inventory-related action, handle it differently
-                # print(f"Undoing inventory action from event {self.current.id_num}: {self.current.description}")
-
-                # Call the game logic to handle inventory-related undo
-
+                self.is_move_function = False
         else:
-            print("No previous events to undo.")  # fix this
-
-    # Note: You may add other methods to this class as needed
+            print("No previous events to undo.")
 
 
 if __name__ == "__main__":
     pass
-    # When you are ready to check your work with python_ta, uncomment the following lines.
-    # (Delete the "#" and space before each line.)
-    # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 120,

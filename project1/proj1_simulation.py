@@ -45,20 +45,14 @@ class AdventureGameSimulation:
         self._events = EventList()
         self._game = AdventureGame(game_data_file, initial_location_id)
 
-        # TODO: Add first event (initial location, no previous command)
-        # Hint: self._game.get_location() gives you back the current location
-
-        initial_location = self._game.get_location()  # gives back the current location
+        initial_location = self._game.get_location()
         initial_event = Event(id_num=initial_location.id_num, description=initial_location.brief_description,
                               next_command=None, next=None, prev=None)
         self._events.add_event(initial_event)
         # lines 125 - 128 were provided by ChatGPT
 
         self.generate_events(commands, initial_location)
-
         # line 132 was provided by ChatGPT
-        # TODO: Generate the remaining events based on the commands and initial location
-        # Hint: Call self.generate_events with the appropriate arguments
 
     def generate_events(self, commands: list[str], current_location: Location) -> None:
         """Generate all events in this simulation.
@@ -67,9 +61,6 @@ class AdventureGameSimulation:
         - len(commands) > 0
         - all commands in the given list are valid commands at each associated location in the game
         """
-
-        # TODO: Complete this method as specified. For each command, generate the event and add
-        #  it to self._events.
         previous_event = None
 
         for command in commands:
@@ -97,8 +88,6 @@ class AdventureGameSimulation:
                 # Update the previous event to the current one for linking in the next iteration
                 previous_event = new_event
                 current_location = next_location
-        # Hint: current_location.available_commands[command] will return the next location ID
-        # which executing <command> while in <current_location_id> leads to
 
     def get_id_log(self) -> list[int]:
         """
@@ -113,64 +102,57 @@ class AdventureGameSimulation:
         >>> sim.get_id_log()
         [1, 2, 3, 3]
         """
-        # Note: We have completed this method for you. Do NOT modify it for ex1.
         return self._events.get_id_log()
 
     def run(self) -> None:
         """Run the game simulation and log location descriptions."""
-
-        # Note: We have completed this method for you. Do NOT modify it for ex1.
-
-        current_event = self._events.first  # Start from the first event in the list
+        current_event = self._events.first
 
         while current_event:
             print(current_event.description)
             if current_event is not self._events.last:
                 print("You choose:", current_event.next_command)
 
-            # Move to the next event in the linked list
             current_event = current_event.next
 
 
 if __name__ == "__main__":
-    # When you are ready to check your work with python_ta, uncomment the following lines.
-    # (Delete the "#" and space before each line.)
-    # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
-    import python_ta
-    python_ta.check_all(config={
-        'max-line-length': 120,
-        'disable': ['R1705', 'E9998', 'E9999']
-    })
+    # import python_ta
+    # python_ta.check_all(config={
+    #     'max-line-length': 120,
+    #     'disable': ['R1705', 'E9998', 'E9999']
+    # })
 
     win_walkthrough = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee', 'go west',
                        'go north', 'look', 'pick up', 'lock in', 'go south', 'go south', 'look', 'check', 'keyboard',
                        'go east', 'look', 'buy', '21', 'go north', 'go east', 'submit assignment']
     expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
-    sim = AdventureGameSimulation('game_data.json', 1, win_walkthrough)
+    sim = AdventureGameSimulation('game_data.json', 50, win_walkthrough)
     assert expected_log == sim.get_id_log()
 
     lose_demo = ['go east', 'go west', 'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north',
                  'go west', 'go north', 'go south', 'go south', 'go east', 'go north', 'go east', 'go east', 'go west',
                  'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north']
-    expected_log = []  # Update this log list to include the IDs of all locations that would be visited
-    # Uncomment the line below to test your demo
-    sim = AdventureGameSimulation('game_data.json', 1, lose_demo)
+    expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 20, 10, 20, 70, 40, 30,
+                    50, 60, 50, 30, 20, 10, 20, 70, 40, 30]
+    sim = AdventureGameSimulation('game_data.json', 50, lose_demo)
     assert expected_log == sim.get_id_log()
 
-    # TODO: Add code below to provide walkthroughs that show off certain features of the game
-    # TODO: Create a list of commands involving visiting locations, picking up items, and then
-    #   checking the inventory, your list must include the "inventory" command at least once
-    inventory_demo = [..., "inventory", ...]
-    expected_log = []
-    assert expected_log == AdventureGameSimulation(...)
+    inventory_demo = ['go west', 'look', 'buy', 'lychee', 'inventory', 'go west', 'look', 'buy', 'tonkatsu',
+                      'inventory']
+    expected_log = [50, 30, 20]
+    sim = AdventureGameSimulation('game_data.json', 50, inventory_demo)
+    assert expected_log == sim.get_id_log()
 
-    scores_demo = [..., "score", ...]
-    expected_log = []
-    assert expected_log == AdventureGameSimulation(...)
+    scores_demo = ['go east', 'look', 'take', '120', 'score', 'go west', 'go west', 'look', 'buy', 'lychee', 'score']
+    expected_log = [50, 60, 50, 30]
+    sim = AdventureGameSimulation('game_data.json', 50, scores_demo)
+    assert expected_log == sim.get_id_log()
 
-    # Add more enhancement_demos if you have more enhancements
-    enhancement_puzzle_demo = [...]
-    expected_log = []
-    assert expected_log == AdventureGameSimulation(...)
-
-    # Note: You can add more code below for your own testing purposes
+    enhancement_puzzle_demo = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee',
+                               'go west', 'look', 'buy', 'tonkatsu', 'go north', 'look', 'pick up', 'lock in',
+                               'go south', 'go south', 'look', 'check', 'keyboard', 'go east', 'look', 'buy', '21',
+                               'go north', 'go west', 'submit assignment']
+    expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
+    sim = AdventureGameSimulation('game_data.json', 50, enhancement_puzzle_demo)
+    assert expected_log == sim.get_id_log()
