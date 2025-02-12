@@ -175,8 +175,9 @@ class AdventureGame:
 
         if "buy" in current_location.available_actions and current_location.available_actions["buy"]:
             if current_location.items:
-                if current_location.id_num == 20:  # Ensure there's an item to buy
-
+                print(current_location.id_num)
+                if current_location == 20:  # Ensure there's an item to buy
+                    print("come in 20")
                     if display_puzzle1():
                         item = current_location.items[0]  # item = Ramen
                         self.inventory.append(item)  # Add the item to inventory
@@ -184,7 +185,8 @@ class AdventureGame:
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Ramen puzzle.")
-                elif current_location.id_num == 30:
+                elif current_location == 30:
+                    print("come in 30", current_location)
                     if display_puzzle2():
                         item = current_location.items[0]
                         self.inventory.append(item)
@@ -192,7 +194,8 @@ class AdventureGame:
                         print(f"You bought {item}. It has been added to your inventory.")
                     else:
                         print("You couldn't solve the Bubble Tea puzzle.")
-                elif current_location.id_num == 40:
+                elif current_location == 40:
+                    print("come in 30", current_location)
                     if display_puzzle40:
                         item = current_location.items[0]
                         self.inventory.append(item)
@@ -201,10 +204,8 @@ class AdventureGame:
                     else:
                         print("You couldn't solve the Lip Gloss puzzle.")
 
-            else:
-                print("There is nothing to buy here.")
-        else:
-            print("You chose not to buy anything.")
+            # else:
+            #     print("There is nothing to buy here.")
 
     def take_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""
@@ -214,17 +215,19 @@ class AdventureGame:
         item_name = location.items[0]
 
         if "take" in current_location.available_actions and current_location.available_actions["take"]:
-            if current_location.items:  # Ensure there's an item to buy
-                item = current_location.items[0]
-                if location.id_num == 60 and item not in self.inventory:
-                    if display_puzzle60():
-                        self.inventory.append(item)  # Add the item to inventory
-                        self.score += self.item_dict[item_name].target_points
-                        print(f"You took {item}. It has been added to your inventory.")
+            # if current_location.items:  # Ensure there's an item to buy
+            item = current_location.items[0]
+            if item not in self.inventory:
+                if display_puzzle60():
+                    self.inventory.append(item)  # Add the item to inventory
+                    self.score += self.item_dict[item_name].target_points
+                    print(f"You took {item}. It has been added to your inventory.")
                 else:
-                    print("This item has already been retrieved. Move along~")
+                    print("You couldn't solve the apt puzzle.")
             else:
-                print("There is nothing to take here.")
+                print("This item has already been retrieved. Move along~")
+        else:
+            print("There is nothing to take here.")
 
     def check_item(self):
         """Handle the purchase of an item if the 'buy' action is available."""

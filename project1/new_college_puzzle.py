@@ -40,6 +40,7 @@ def display_puzzle1():
     message = ""  # Message to show result feedback
 
     running = True
+    success = False
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -59,10 +60,12 @@ def display_puzzle1():
                     elif event.key == pygame.K_RETURN:
                         if user_input.lower() == correct_answer:
                             message = "Correct! You get the ramen!"
+                            success = True
                             # Close the puzzle window and exit
                             running = False  # Stop the loop to exit the puzzle
                         else:
                             message = "Wrong! Try again."
+                            success = True
                         user_input = ""  # Clear input after pressing enter
                     else:
                         user_input += event.unicode  # Add typed character to input
@@ -101,7 +104,7 @@ def display_puzzle1():
         clock.tick(30)  # Set the frame rate to 30 FPS
 
     pygame.quit()
-
+    return success
 
 def wrap_text(text, font, max_width):
     """Wrap text to fit within the specified width."""

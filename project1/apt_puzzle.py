@@ -29,6 +29,8 @@ def display_puzzle60():
     message = ""  # Message to show result feedback
 
     running = True
+    success = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,10 +50,11 @@ def display_puzzle60():
                     elif event.key == pygame.K_RETURN:
                         if user_input.lower() == correct_answer:
                             message = "Correct! You get the Lucky Mug!"
+                            success = True
                             running = False
-
                         else:
                             message = "Wrong! Try again."
+                            success = False
                         user_input = ""  # Clear input after pressing enter
                     else:
                         user_input += event.unicode  # Add typed character to input
@@ -79,3 +82,4 @@ def display_puzzle60():
         clock.tick(30)  # Set the frame rate to 30 FPS
 
     pygame.quit()
+    return True
