@@ -23,11 +23,11 @@ from typing import Optional
 
 from game_entities import Location, Item
 from proj1_event_logger import Event, EventList
-from project1.apt_puzzle import display_puzzle60
-from project1.new_college_puzzle import display_puzzle1
-from project1.kungfutea_puzzle import display_puzzle2
-from project1.robarts_puzzle import display_puzzle10
-from project1.uoft_bookstore_puzzle import display_puzzle40
+from project1.Puzzle_files.apt_puzzle import display_puzzle60
+from project1.Puzzle_files.new_college_puzzle import display_puzzle1
+from project1.Puzzle_files.kungfutea_puzzle import display_puzzle2
+from project1.Puzzle_files.robarts_puzzle import display_puzzle10
+from project1.Puzzle_files.uoft_bookstore_puzzle import display_puzzle40
 
 
 # Note: You may add in other import statements here as needed
