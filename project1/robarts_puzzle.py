@@ -47,7 +47,8 @@ def display_puzzle10():
                         user_input = user_input[:-1]  # Remove last character
                     elif event.key == pygame.K_RETURN:
                         if user_input.lower() == correct_answer:
-                            message = "Correct! You get the ramen!"
+                            message = "Correct! You get the USB Drive!"
+                            running = False
                         else:
                             message = "Wrong! Try again."
                         user_input = ""  # Clear input after pressing enter

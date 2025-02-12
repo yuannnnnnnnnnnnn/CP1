@@ -23,6 +23,7 @@ from typing import Optional
 
 from game_entities import Location, Item
 from proj1_event_logger import Event, EventList
+from project1.apt_puzzle import display_puzzle60
 from project1.new_college_puzzle import display_puzzle1
 from project1.kungfutea_puzzle import display_puzzle2
 from project1.robarts_puzzle import display_puzzle10
@@ -214,12 +215,12 @@ class AdventureGame:
 
         if "take" in current_location.available_actions and current_location.available_actions["take"]:
             if current_location.items:  # Ensure there's an item to buy
-                item = current_location.items[0]  # Get the first item from the list of items
-                if item not in self.inventory:
-                    self.inventory.append(item)  # Add the item to inventory
-                    self.score += self.item_dict[item_name].target_points
-                # self.score += item.target_points
-                    print(f"You took {item}. It has been added to your inventory.")
+                item = current_location.items[0]
+                if location.id_num == 60 and item not in self.inventory:
+                    if display_puzzle60():
+                        self.inventory.append(item)  # Add the item to inventory
+                        self.score += self.item_dict[item_name].target_points
+                        print(f"You took {item}. It has been added to your inventory.")
                 else:
                     print("This item has already been retrieved. Move along~")
             else:
