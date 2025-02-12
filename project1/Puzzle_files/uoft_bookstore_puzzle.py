@@ -1,6 +1,7 @@
 import pygame
 
 pygame.init()
+pygame.font.init()
 
 
 def display_puzzle40():

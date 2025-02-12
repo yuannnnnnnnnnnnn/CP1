@@ -1,7 +1,7 @@
 import pygame
 
 pygame.init()
-
+pygame.font.init()
 
 def display_puzzle10():
     """Displays the word scramble puzzle and handles user input."""
