@@ -4,6 +4,31 @@ import pygame
 pygame.init()
 
 
+def wrap_text(text, font, max_width):
+    """Wrap text to fit within the specified width."""
+    lines = []
+    words = text.split(' ')  # Split text into words
+
+    current_line = ""
+    for word in words:
+        # Check if adding the word exceeds the max width
+        test_line = f"{current_line} {word}".strip()
+        test_surface = font.render(test_line, True, (255, 255, 255))
+
+        if test_surface.get_width() <= max_width:
+            current_line = test_line  # Add word to current line
+        else:
+            # If the line exceeds the max width, start a new line
+            lines.append(current_line)
+            current_line = word
+
+    # Add the last line if there is any remaining text
+    if current_line:
+        lines.append(current_line)
+
+    return lines
+
+
 def display_puzzle1():
     """Displays the word scramble puzzle and handles user input."""
     # Set up the game window
@@ -65,7 +90,7 @@ def display_puzzle1():
                             running = False  # Stop the loop to exit the puzzle
                         else:
                             message = "Wrong! Try again."
-                            success = True
+                            success = False
                         user_input = ""  # Clear input after pressing enter
                     else:
                         user_input += event.unicode  # Add typed character to input
@@ -89,7 +114,7 @@ def display_puzzle1():
 
         # Draw the input box
         input_box = pygame.Rect(50, screen_height - 65, screen_width - 100, 40)
-        pygame.draw.rect(screen, (0, 0, 0), input_box, 2)
+        pygame.draw.rect(screen, (255, 255, 255), input_box)  # White background
 
         # Render the user's typed text in the input box
         input_text_surface = input_font.render(user_input, True, (0, 0, 0))
@@ -106,29 +131,7 @@ def display_puzzle1():
     pygame.quit()
     return success
 
-def wrap_text(text, font, max_width):
-    """Wrap text to fit within the specified width."""
-    lines = []
-    words = text.split(' ')  # Split text into words
 
-    current_line = ""
-    for word in words:
-        # Check if adding the word exceeds the max width
-        test_line = f"{current_line} {word}".strip()
-        test_surface = font.render(test_line, True, (255, 255, 255))
-
-        if test_surface.get_width() <= max_width:
-            current_line = test_line  # Add word to current line
-        else:
-            # If the line exceeds the max width, start a new line
-            lines.append(current_line)
-            current_line = word
-
-    # Add the last line if there is any remaining text
-    if current_line:
-        lines.append(current_line)
-
-    return lines
 
 
 # Run the display function
