@@ -280,6 +280,13 @@ if __name__ == "__main__":
         # YOUR CODE HERE
 
         # Display possible actions at this location
+        if game.move <= 30:
+            if game.score >= 250:
+                if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
+                    print("Congratulations you have won the game")
+                    game.ongoing = False
+
+        print(location.brief_description)
         print("What would you like to do? Choose from: look, inventory, score, undo, log, quit")
         print("At this location, you can also:")
         for action in location.available_commands:
@@ -352,8 +359,3 @@ if __name__ == "__main__":
 
         # if
             # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
-
-        if game.move <= 30:
-            if game.score >= 225:
-                if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
-                    print("Congratulations you have won the game")
