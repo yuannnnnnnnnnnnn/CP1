@@ -367,8 +367,8 @@ if __name__ == "__main__":
             game.current_location_id = result
             game.move += 1
 
-        if game.move <= 30:
-            if game.score >= 250:
+        if game.score >= 250:
+            if game.move <= 30:
                 if all(item in game.inventory for item in ['Laptop Charger', 'USB Drive', 'Lucky Mug']):
                     print("Congratulations you have won the game")
                     game.ongoing = False
