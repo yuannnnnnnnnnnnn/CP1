@@ -4,16 +4,16 @@ import pygame
 pygame.init()
 
 
-def display_puzzle10():
+def display_puzzle60():
     """Displays the word scramble puzzle and handles user input."""
     # Set up the game window
-    screen_width, screen_height = 400, 500
+    screen_width, screen_height = 400, 550
     screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Cipher Puzzle")
+    pygame.display.set_caption("Math Puzzle")
 
     # Load and resize image
-    chef_image = pygame.image.load("Images/cipher_puzzle.png")
-    chef_image = pygame.transform.scale(chef_image, (400, 500))  # Adjust size as needed
+    chef_image = pygame.image.load("../Images/apt_puzzle.png")
+    chef_image = pygame.transform.scale(chef_image, (400, 550))  # Adjust size as needed
     chef_x = (screen_width - chef_image.get_width()) // 2
     chef_y = (screen_height - chef_image.get_height()) // 2
 
@@ -23,13 +23,14 @@ def display_puzzle10():
     input_font = pygame.font.SysFont(None, 40)  # Font for the input text
     clock = pygame.time.Clock()
 
-    correct_answer = "lock in"  # Correct answer for the puzzle
+    correct_answer = "120"  # Correct answer for the puzzle
     user_input = ""  # Input that user types
     input_active = False  # State if the input box is active or not
     message = ""  # Message to show result feedback
 
     running = True
     success = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,7 +49,7 @@ def display_puzzle10():
                         user_input = user_input[:-1]  # Remove last character
                     elif event.key == pygame.K_RETURN:
                         if user_input.lower() == correct_answer:
-                            message = "Correct! You get the USB Drive!"
+                            message = "Correct! You get the Lucky Mug!"
                             success = True
                             running = False
                         else:

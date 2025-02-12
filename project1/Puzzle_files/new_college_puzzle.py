@@ -170,7 +170,7 @@ def display_puzzle1():
     pygame.display.set_caption("Ramen Puzzle")
 
     # Load and resize image
-    chef_image = pygame.image.load("Images/chef_image.png")
+    chef_image = pygame.image.load("../Images/chef_image.png")
     chef_image = pygame.transform.scale(chef_image, (600, 600))  # Adjust size as needed
     chef_x = (screen_width - chef_image.get_width()) // 2
     chef_y = (screen_height - chef_image.get_height()) // 2
