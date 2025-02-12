@@ -82,4 +82,4 @@ def display_puzzle60():
         clock.tick(30)  # Set the frame rate to 30 FPS
 
     pygame.quit()
-    return True
+    return success
