@@ -1,6 +1,5 @@
 import pygame
 
-# Initialize Pygame
 pygame.init()
 
 
@@ -12,7 +11,7 @@ def display_puzzle40():
     pygame.display.set_caption("Sum Puzzle")
 
     # Load and resize image
-    chef_image = pygame.image.load("../Images/vending_machine.png")
+    chef_image = pygame.image.load("Images/vending_machine.png")
     chef_image = pygame.transform.scale(chef_image, (400, 550))  # Adjust size as needed
     chef_x = (screen_width - chef_image.get_width()) // 2
     chef_y = (screen_height - chef_image.get_height()) // 2
@@ -30,6 +29,7 @@ def display_puzzle40():
 
     running = True
     success = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

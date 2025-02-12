@@ -1,6 +1,5 @@
 import pygame
 
-# Initialize Pygame
 pygame.init()
 
 
@@ -12,7 +11,7 @@ def display_puzzle10():
     pygame.display.set_caption("Cipher Puzzle")
 
     # Load and resize image
-    chef_image = pygame.image.load("../Images/cipher_puzzle.png")
+    chef_image = pygame.image.load("Images/cipher_puzzle.png")
     chef_image = pygame.transform.scale(chef_image, (400, 500))  # Adjust size as needed
     chef_x = (screen_width - chef_image.get_width()) // 2
     chef_y = (screen_height - chef_image.get_height()) // 2
@@ -30,6 +29,7 @@ def display_puzzle10():
 
     running = True
     success = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -50,7 +50,8 @@ def display_puzzle10():
                         if user_input.lower() == correct_answer:
                             message = "Correct! You get the USB Drive!"
                             success = True
-                            running = False
+                            # Close the puzzle window and exit
+                            running = False  # Stop the loop to exit the puzzle
                         else:
                             message = "Wrong! Try again."
                             success = False

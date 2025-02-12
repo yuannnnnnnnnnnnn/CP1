@@ -1,6 +1,5 @@
 import pygame
 
-# Initialize Pygame
 pygame.init()
 
 
@@ -12,7 +11,7 @@ def display_text():
     pygame.display.set_caption("Riddle Puzzle")
 
     # Load and resize image
-    chef_image = pygame.image.load("../Images/riddle_puzzle.png")
+    chef_image = pygame.image.load("Images/riddle_puzzle.png")
     chef_image = pygame.transform.scale(chef_image, (400, 550))  # Adjust size as needed
     chef_x = (screen_width - chef_image.get_width()) // 2
     chef_y = (screen_height - chef_image.get_height()) // 2
@@ -30,6 +29,7 @@ def display_text():
 
     running = True
     success = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,7 +48,7 @@ def display_text():
                         user_input = user_input[:-1]  # Remove last character
                     elif event.key == pygame.K_RETURN:
                         if user_input.lower() == correct_answer:
-                            message = "Correct! You can get your charger back!"
+                            message = "Correct! You retrieved your Laptop Charger!"
                             success = True
                             running = False
                         else:

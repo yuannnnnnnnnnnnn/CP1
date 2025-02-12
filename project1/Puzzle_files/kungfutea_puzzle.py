@@ -1,6 +1,5 @@
 import pygame
 
-# Initialize Pygame
 pygame.init()
 
 
@@ -12,7 +11,7 @@ def display_puzzle2():
     pygame.display.set_caption("Crossword Puzzle")
 
     # Load and resize image
-    chef_image = pygame.image.load("../Images/crossword_puzzle.png")
+    chef_image = pygame.image.load("Images/crossword_puzzle.png")
     chef_image = pygame.transform.scale(chef_image, (600, 300))  # Adjust size as needed
     chef_x = (screen_width - chef_image.get_width()) // 2
     chef_y = (screen_height - chef_image.get_height()) // 2
@@ -28,17 +27,20 @@ def display_puzzle2():
     input_active = False  # State if the input box is active or not
     message = ""  # Message to show result feedback
 
-    input_box = pygame.Rect(320, screen_height - 85, 250, 40)
     running = True
     success = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # Check if input box is clicked using collidepoint
-                input_active = input_box.collidepoint(event.pos)
+                # Check if input box is clicked
+                if 50 <= pygame.mouse.get_pos()[0] <= screen_width - 50 and screen_height - 70 <= pygame.mouse.get_pos()[1] <= screen_height - 30:
+                    input_active = True
+                else:
+                    input_active = False
 
             if event.type == pygame.KEYDOWN:
                 if input_active:
@@ -63,6 +65,7 @@ def display_puzzle2():
         screen.blit(chef_image, (chef_x, chef_y))
 
         # Draw the input box
+        input_box = pygame.Rect(320, screen_height - 85, 250, 40)
         pygame.draw.rect(screen, (255, 255, 255), input_box, 2)
 
         # Render the user's typed text in the input box
@@ -77,9 +80,6 @@ def display_puzzle2():
         pygame.display.flip()  # Update the display
         clock.tick(30)  # Set the frame rate to 30 FPS
 
-        # Delay before quitting to show success message
-    if success:
-        pygame.time.delay(2000)  # Pause for 2 seconds
 
     pygame.quit()
     return success
