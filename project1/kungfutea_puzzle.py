@@ -28,6 +28,7 @@ def display_puzzle2():
     input_active = False  # State if the input box is active or not
     message = ""  # Message to show result feedback
 
+    input_box = pygame.Rect(320, screen_height - 85, 250, 40)
     running = True
     success = False
     while running:
@@ -36,11 +37,8 @@ def display_puzzle2():
                 running = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # Check if input box is clicked
-                if 50 <= pygame.mouse.get_pos()[0] <= screen_width - 50 and screen_height - 70 <= pygame.mouse.get_pos()[1] <= screen_height - 30:
-                    input_active = True
-                else:
-                    input_active = False
+                # Check if input box is clicked using collidepoint
+                input_active = input_box.collidepoint(event.pos)
 
             if event.type == pygame.KEYDOWN:
                 if input_active:
@@ -65,20 +63,23 @@ def display_puzzle2():
         screen.blit(chef_image, (chef_x, chef_y))
 
         # Draw the input box
-        input_box = pygame.Rect(320, screen_height - 85, 250, 40)
         pygame.draw.rect(screen, (255, 255, 255), input_box, 2)
 
         # Render the user's typed text in the input box
         input_text_surface = input_font.render(user_input, True, (0, 0, 0))
-        screen.blit(input_text_surface, (input_box.x + 10, input_box.y + 5))  # Position the text inside the box
+        screen.blit(input_text_surface, (input_box.x + 10, input_box.y + 5))
 
         # Display feedback message
         if message:
-            message_surface = font.render(message, True, (0, 255, 0) if message.startswith("Correct") else (255, 0, 0))  # Green for correct, red for wrong
+            message_surface = font.render(message, True, (0, 255, 0) if message.startswith("Correct") else (255, 0, 0))
             screen.blit(message_surface, (screen_width // 2 - message_surface.get_width() // 2, screen_height - 110))
 
         pygame.display.flip()  # Update the display
         clock.tick(30)  # Set the frame rate to 30 FPS
+
+        # Delay before quitting to show success message
+    if success:
+        pygame.time.delay(2000)  # Pause for 2 seconds
 
     pygame.quit()
     return success
