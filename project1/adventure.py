@@ -192,6 +192,7 @@ class AdventureGame:
                     else:
                         print("You couldn't solve the Bubble Tea puzzle.")
                 elif location.id_num == 40:
+                    print("30")
                     if display_puzzle40:
                         item = current_location.items[0]
                         self.inventory.append(item)
