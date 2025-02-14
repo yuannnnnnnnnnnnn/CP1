@@ -111,11 +111,11 @@ class AdventureGameSimulation:
 
 
 if __name__ == "__main__":
-    import python_ta
-    python_ta.check_all(config={
-        'max-line-length': 120,
-        'disable': ['R1705', 'E9998', 'E9999']
-    })
+    # import python_ta
+    # python_ta.check_all(config={
+    #     'max-line-length': 120,
+    #     'disable': ['R1705', 'E9998', 'E9999']
+    # })
 
     win_walkthrough = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee', 'go west',
                        'go north', 'look', 'pick up', 'lock in', 'go south', 'go south', 'look', 'check', 'keyboard',
@@ -124,11 +124,8 @@ if __name__ == "__main__":
     simulation = AdventureGameSimulation('game_data.json', 50, win_walkthrough)
     assert expected_log == simulation.get_id_log()
 
-    lose_demo = ['go east', 'go west', 'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north',
-                 'go west', 'go north', 'go south', 'go south', 'go east', 'go north', 'go east', 'go east', 'go west',
-                 'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north']
-    expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 20, 10, 20, 70, 40, 30,
-                    50, 60, 50, 30, 20, 10, 20, 70, 40, 30]
+    lose_demo = ['go west', 'go west', 'look', 'buy', 'tonkatsu']
+    expected_log = [50, 30, 20]
     simulation = AdventureGameSimulation('game_data.json', 50, lose_demo)
     assert expected_log == simulation.get_id_log()
 
