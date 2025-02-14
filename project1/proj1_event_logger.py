@@ -54,7 +54,6 @@ class EventList:
         - first: The first event in the list (or None if the list is empty).
         - last: The last event in the list (or None if the list is empty).
         - current: The current event being processed.
-        - is_move_function: A flag indicating whether the current event moves the player.
 
     Representation Invariants:
         - self.first is None == self.last is None
@@ -64,7 +63,6 @@ class EventList:
     first: Optional[Event]
     last: Optional[Event]
     current: Optional[Event]
-    is_move_function: bool
 
     def __init__(self) -> None:
         """Initialize a new empty event list."""
@@ -72,7 +70,6 @@ class EventList:
         self.first = None
         self.last = None
         self.current = None
-        self.is_move_function = True
 
     def display_events(self) -> None:
         """Display all events in chronological order.
@@ -86,7 +83,7 @@ class EventList:
         """Return whether this event list is empty."""
         return self.first is None
 
-    def add_event(self, event: Event, command: str = None) -> None:
+    def add_event(self, event: Event, command: str) -> None:
         """Add the given new event to the end of this event list.
         The given command is the command which was used to reach this new event, or None if this is the first
         event in the game.
@@ -107,12 +104,6 @@ class EventList:
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
         If the list is empty, do nothing."""
-        # curr = self.first
-        # if curr is None:
-        #     return
-        # while curr is not None:
-        #     curr = curr.next
-        # curr = curr.next
         if self.first is None:
             return
 
@@ -141,20 +132,29 @@ class EventList:
 
         return items_so_far
 
-    def undo_event(self) -> None:
-        """Undo the last move or inventory-related action."""
 
-        if self.current is None:
-            print("No events have been visited yet.")
-
-        elif self.current.prev is not None:
-            if self.current.next_command in ['go north', 'go south', 'go east', 'go west']:
-                self.is_move_function = True
-                self.current = self.current.prev
-            else:
-                self.is_move_function = False
-        else:
-            print("No previous events to undo.")
+# def undo_event(self) -> None:
+#     """Undo the last move or inventory-related action."""
+#
+#     if self.current.prev is None:
+#         print("No events have been visited yet.")
+#         # come check this again
+#
+#     if self.current.prev is not None:
+#         self.current = self.current.prev
+#         self.remove_last_event()
+#     else:
+#         print("No previous events to undo.")
+#
+#
+# def thisfun(self) -> Optional[bool]:
+#     """sdf"""
+#     if self.current.next_command in ['go north', 'go south', 'go east', 'go west']:
+#         return True
+#     elif self.current.next_command in ['check', 'pick up', 'take', 'buy']:
+#         return False
+#     else:
+#         return None
 
 
 if __name__ == "__main__":

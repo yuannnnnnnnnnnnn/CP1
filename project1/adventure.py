@@ -73,7 +73,6 @@ class AdventureGame:
         """
 
         self._locations, self._items = self._load_game_data(game_data_file)
-
         self.current_location_id = initial_location_id
         self.ongoing = True
         self.inventory = []
@@ -132,12 +131,14 @@ class AdventureGame:
             if curr_location.items:
                 if curr_location.id_num == 10:
                     item = curr_location.items[0]
+                    # item_description = curr_location.items[1]
                     if item not in self.inventory:
                         if display_puzzle10():
 
                             self.inventory.append(item)  # Add to inventory
                             self.score += self.item_dict[item_name].target_points
                             print(f"You picked up {item}. It has been added to your inventory.")
+                            # print(item_description)
                         else:
                             print("You couldn't solve the puzzle.")
                     else:
@@ -222,20 +223,18 @@ class AdventureGame:
         """Displays the current score of the player"""
         print(f"Your current score is: {self.score}")
 
-    def undo_stuff(self) -> None:
+    def undo_item_action (self) -> None:
         """Undo the last command or any action related to the game"""
         self.item_dict = {item.name: item for item in self._items}
         item_name = location.items[0]
-        if game_log.is_move_function == False:
-            if self.inventory:
-                self.item_dict = {item.name: item for item in self._items}
-                item = self.inventory.pop()
-                self.score += self.item_dict[item_name].target_points
-                print(f"Removed {item} from your inventory. Your score is now {self.score}.")
-            else:
-                print("No items to remove from inventory.")
+        if item_name in self.inventory:
+            item = self.inventory.pop()
+            self.score -= self.item_dict[item_name].target_points
+            print(f"Removed {item} from your inventory. Your score is now {self.score}.")
+        else:
+            print("No items to remove from inventory.")
 
-            print("Undoing a 'check' action. No item removed.")
+            # print("Undoing an event. No item removed.")
 
     def submit_assignment(self) -> None:
         """Deposit """
@@ -251,6 +250,40 @@ class AdventureGame:
         else:
             print("Try again! You haven't reach 250 points!")
         self.ongoing = False
+
+    def undo_event(self) -> None:
+        """Undo the last move or inventory-related action."""
+
+        if game_log.current.prev is None:
+            print("No events have been visited yet.")
+            # come check this again
+
+        if game_log.current.prev is not None:
+            game_log.current = game_log.current.prev
+            game_log.remove_last_event()
+            print("and then this")
+        else:
+            print("No previous events to undo.")
+
+    def thisfun(self) -> Optional[bool]:
+        """sdf"""
+        if game_log.current.next_command in ['go north', 'go south', 'go east', 'go west']:
+            return True
+        elif game_log.current.next_command in ['check', 'pick up', 'take', 'buy']:
+            return False
+        else:
+            return None
+
+    def undo_together(self):
+        """..."""
+        if self.thisfun():
+            self.undo_event()
+            game.current_location_id = game_log.current.id_num
+
+        elif self.thisfun() is None:
+            pass
+        else:
+            self.undo_item_action()
 
 
 if __name__ == "__main__":
@@ -272,7 +305,8 @@ if __name__ == "__main__":
 
         new_event = Event(id_num=location.id_num, description=location.brief_description, next_command=choice,
                           next=None, prev=None)
-        game_log.add_event(new_event)
+
+        game_log.add_event(new_event, choice)
 
         print(location.brief_description)
         print("What would you like to do? Choose from: look, inventory, score, undo, log, quit")
@@ -313,13 +347,7 @@ if __name__ == "__main__":
             elif choice == "score":
                 game.show_score()
             elif choice == "undo":
-                current_location = game.get_location()
-                if game_log.is_move_function:
-                    game_log.undo_event()
-                    game.current_location_id = game_log.current.id_num
-                else:
-                    print('third goin in')
-                    game.undo_stuff()
+                game.undo_together()
             elif choice == 'pick up':
                 game.pick_item()
             elif choice == 'buy':

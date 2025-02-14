@@ -4,7 +4,7 @@
       "id": 10,
       "name": "Robart Commons",
       "brief_description": "You are currently standing on the third floor of Robart's Commons.",
-      "long_description": "You find yourself back at Robart’s Commons–where you spent the whole night last night–and ah ha! You spot a small black usb exactly where you sat last night. Would you like to pick it up?",
+      "long_description": "You find yourself back at Robart's Commons-where you spent the whole night last night-and ah ha! You spot a small black usb exactly where you sat last night. Would you like to pick it up?",
       "available_commands": {
         "go south": 20
       },
@@ -18,7 +18,7 @@
       "id": 20,
       "name": "New College Dining Hall",
       "brief_description": "You are currently standing in front of the pan station at the New College dinning hall.",
-      "long_description": "You are currently standing in the New College Dining Hall. You realize they are serving ramen today (your favourite). Suddenly you feel your stomach growls… would you like to buy the ramen…",
+      "long_description": "You are currently standing in the New College Dining Hall. You realize they are serving ramen today (your favourite). Suddenly you feel your stomach growl... would you like to buy the ramen...?",
       "available_commands": {
         "go north": 10,
         "go east": 30,
@@ -33,8 +33,8 @@
     {
       "id": 30,
       "name": "KungFu Tea",
-      "brief_description": "You are currently standing in front of KungFu Tea in Syd'd Cafe.",
-      "long_description": "You have arrived at the infamous KungFu Tea! Wha-what’s that smell? I think they just finished steaming a fresh batch of pearls… how tempting. The line is atrocious, I guess everybody loves bubble tea–for the taste and the caffeine. Would you like to buy a drink?",
+      "brief_description": "You are currently standing in front of KungFu Tea in Syd's Cafe.",
+      "long_description": "You have arrived at the infamous KungFu Tea! Wha-what's that smell? I think they just finished steaming a fresh batch of pearls... how tempting. The line is atrocious, I guess everybody loves bubble tea. Would you like to buy a drink?",
       "available_commands": {
         "go south": 40,
         "go east": 50,
@@ -50,7 +50,7 @@
       "id": 40,
       "name": "UofT Bookstore",
       "brief_description": "You are currently inside the Uoft Bookstore gazing into the Sephora Vending machine.",
-      "long_description": "You wandered inside the UofT Bookstore and spotted the Sephora Vending Machine… something immediately catches your eye… your favourite lipgloss (which you just so happen ran out of)... how can you possibly go about your day with dry lips! Would you like to buy the lip gloss?",
+      "long_description": "You wandered inside the UofT Bookstore and spotted the Sephora Vending Machine... something immediately catches your eye... your favourite lipgloss (which you just so happen ran out of)... how can you possibly go about your day with dry lips! Would you like to buy the lip gloss?",
       "available_commands": {
         "go north": 30,
         "go west": 70
@@ -80,7 +80,7 @@
       "id": 60,
       "name": "Friend's Apartment",
       "brief_description": "You are currently in front of your friend's apartment front door.",
-      "long_description": "Breaking out in a sweat, you are standing in front of your friend's apartment, gosh they live so far away. Frantically, you ring their door number. After a bit of waiting they come down to greet you. They’re still in their pajamas, how lucky. You ask them if you possibly left something important at her place, maybe the last time you were here?… they scurry into the kitchen and hand you something… AH HA! It’s you oh so beloved Lucky Mug, do you take it?",
+      "long_description": "Breaking out in a sweat, you are standing in front of your friend's apartment, gosh they live so far away. Frantically, you ring their door number. After a bit of waiting they come down to greet you. They're still in their pajamas... how lucky. You ask them if you possibly left something important at her place, maybe the last time you were here?...they scurry back into their apartment. In a couple minutes, they come back out and hand you something... AH HA! It's your oh-so beloved Lucky Mug, do you take it?",
       "available_commands": {
         "go west": 50
       },
@@ -94,7 +94,7 @@
       "id": 70,
       "name": "McLennan Physical Laboratory",
       "brief_description": "You are currently in room 203 of McLennan Physical Laboratory.",
-      "long_description": "You are in the doorway of room 203 of McLennan Physical Laboratory (your favorite spot on campus). You just had your MAT137 lecture here yesterday… Hey! Maybe you left your Laptop Charger here, I mean, your laptop is always dead so you might have been charging it here during class. Would you like to check around?",
+      "long_description": "You are in the doorway of room 203 of McLennan Physical Laboratory (your favorite spot on campus!). You just had your MAT137 lecture here yesterday... Hey! Maybe you left your Laptop Charger here, I mean, your laptop is always dead so you might have been charging it here during class. Would you like to check around?",
       "available_commands": {
         "go north": 20,
         "go east": 40
