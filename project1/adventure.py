@@ -267,18 +267,13 @@ class AdventureGame:
             self.ongoing = False
             return
 
-        # if self.move > 25:
-        #     print("OH NO! You exceeded your maximum number moves!")
-        #     self.ongoing = False
-        #     return
-
         required_items = {'Laptop Charger', 'USB Drive', 'Lucky Mug'}
         if not required_items.issubset(self.inventory):
             print("Try again! You didn't collect all three required items!")
             self.ongoing = False
             return
 
-        print("Congratulations! You have won the game!")
+        print("Congratulations! You have won the game! You've worked hard. Thanks for playing ;)")
         self.ongoing = False
 
     def undo_item_action(self) -> None:

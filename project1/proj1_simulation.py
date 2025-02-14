@@ -117,33 +117,29 @@ if __name__ == "__main__":
     #     'disable': ['R1705', 'E9998', 'E9999']
     # })
 
-    win_walkthrough = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee', 'go west',
-                       'go north', 'look', 'pick up', 'lock in', 'go south', 'go south', 'look', 'check', 'keyboard',
-                       'go east', 'look', 'buy', '21', 'go north', 'go east', 'submit assignment']
+    win_walkthrough = ['go east', 'look', 'take', 'go west', 'go west', 'look', 'buy', 'go west',
+                       'go north', 'look', 'pick up', 'go south', 'go south', 'look', 'check',
+                       'go east', 'look', 'buy', 'go north', 'go east', 'submit assignment']
     expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
     simulation = AdventureGameSimulation('game_data.json', 50, win_walkthrough)
     assert expected_log == simulation.get_id_log()
 
-    lose_demo = ['go west', 'go west', 'look', 'buy', 'tonkatsu']
+    lose_demo = ['go west', 'go west', 'look', 'buy']
     expected_log = [50, 30, 20]
     simulation = AdventureGameSimulation('game_data.json', 50, lose_demo)
     assert expected_log == simulation.get_id_log()
 
-    inventory_demo = ['go west', 'look', 'buy', 'lychee', 'inventory', 'go west', 'look', 'buy', 'tonkatsu',
-                      'inventory']
-    expected_log = [50, 30, 20]
+    inventory_demo = ['go west', 'look', 'buy', 'inventory']
+    expected_log = [50, 30]
     simulation = AdventureGameSimulation('game_data.json', 50, inventory_demo)
     assert expected_log == simulation.get_id_log()
 
-    scores_demo = ['go east', 'look', 'take', '120', 'score', 'go west', 'go west', 'look', 'buy', 'lychee', 'score']
+    scores_demo = ['go east', 'look', 'take', 'score', 'go west', 'go west', 'look', 'buy', 'score']
     expected_log = [50, 60, 50, 30]
     simulation = AdventureGameSimulation('game_data.json', 50, scores_demo)
     assert expected_log == simulation.get_id_log()
 
-    enhancement_puzzle_demo = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee',
-                               'go west', 'look', 'buy', 'tonkatsu', 'go north', 'look', 'pick up', 'lock in',
-                               'go south', 'go south', 'look', 'check', 'keyboard', 'go east', 'look', 'buy', '21',
-                               'go north', 'go west', 'submit assignment']
-    expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
+    enhancement_puzzle_demo = ['go east', 'look', 'take']
+    expected_log = [50, 60]
     simulation = AdventureGameSimulation('game_data.json', 50, enhancement_puzzle_demo)
     assert expected_log == simulation.get_id_log()

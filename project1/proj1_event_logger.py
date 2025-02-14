@@ -90,15 +90,15 @@ class EventList:
         """
         if self.first is None:
             self.first = event
-            event.next_command = command
+            event.next_command = None  # First event should have None
         else:
-            curr = self.first
-            while curr.next is not None:
-                curr = curr.next
+            event.prev = self.last
+            if self.last:
+                self.last.next = event
+                self.last.next_command = command
+            event.next_command = None
 
-            curr.next = event
-            event.prev = curr
-            curr.next_command = command
+        self.last = event
         self.current = event
 
     def remove_last_event(self) -> None:
