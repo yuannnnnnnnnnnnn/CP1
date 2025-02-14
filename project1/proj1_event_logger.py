@@ -83,7 +83,7 @@ class EventList:
         """Return whether this event list is empty."""
         return self.first is None
 
-    def add_event(self, event: Event, command: str) -> None:
+    def add_event(self, event: Event, command: Optional[str] = None) -> None:
         """Add the given new event to the end of this event list.
         The given command is the command which was used to reach this new event, or None if this is the first
         event in the game.
@@ -131,30 +131,6 @@ class EventList:
             curr = curr.next
 
         return items_so_far
-
-
-# def undo_event(self) -> None:
-#     """Undo the last move or inventory-related action."""
-#
-#     if self.current.prev is None:
-#         print("No events have been visited yet.")
-#         # come check this again
-#
-#     if self.current.prev is not None:
-#         self.current = self.current.prev
-#         self.remove_last_event()
-#     else:
-#         print("No previous events to undo.")
-#
-#
-# def thisfun(self) -> Optional[bool]:
-#     """sdf"""
-#     if self.current.next_command in ['go north', 'go south', 'go east', 'go west']:
-#         return True
-#     elif self.current.next_command in ['check', 'pick up', 'take', 'buy']:
-#         return False
-#     else:
-#         return None
 
 
 if __name__ == "__main__":

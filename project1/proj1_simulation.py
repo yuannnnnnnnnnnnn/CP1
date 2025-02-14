@@ -88,11 +88,11 @@ class AdventureGameSimulation:
         Get back a list of all location IDs in the order that they are visited within a game simulation
         that follows the given commands.
 
-        >>> sim= AdventureGameSimulation('sample_locations.json', 50, ["go east"])
+        >>> sim= AdventureGameSimulation('game_data.json', 50, ["go east"])
         >>> sim.get_id_log()
         [50, 60]
 
-        >>> sim = AdventureGameSimulation('sample_locations.json', 50, ["go east", "go west"])
+        >>> sim = AdventureGameSimulation('game_data.json', 50, ["go east", "go west"])
         >>> sim.get_id_log()
         [50, 60, 50]
         """
@@ -105,17 +105,17 @@ class AdventureGameSimulation:
         while current_event:
             print(current_event.description)
             if current_event is not self._events.last:
-                print("You choose:", current_event.next_command)
+                print("You chose:", current_event.next_command)
 
             current_event = current_event.next
 
 
 if __name__ == "__main__":
-    # import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 120,
-    #     'disable': ['R1705', 'E9998', 'E9999']
-    # })
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 120,
+        'disable': ['R1705', 'E9998', 'E9999']
+    })
 
     win_walkthrough = ['go east', 'look', 'take', '120', 'go west', 'go west', 'look', 'buy', 'lychee', 'go west',
                        'go north', 'look', 'pick up', 'lock in', 'go south', 'go south', 'look', 'check', 'keyboard',
