@@ -7,7 +7,7 @@ pygame.font.init()
 
 
 def display_puzzle2():
-    """Displays the word scramble puzzle and handles user input."""
+    """Displays the crossword puzzle in Pygame and handles user input."""
     screen_width, screen_height = 600, 300
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Crossword Puzzle")
@@ -36,7 +36,8 @@ def display_puzzle2():
                 running = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if 50 <= pygame.mouse.get_pos()[0] <= screen_width - 50 and screen_height - 70 <= pygame.mouse.get_pos()[1] <= screen_height - 30:
+                if (50 <= pygame.mouse.get_pos()[0] <= screen_width - 50 and screen_height - 70
+                        <= pygame.mouse.get_pos()[1] <= screen_height - 30):
                     input_active = True
                 else:
                     input_active = False

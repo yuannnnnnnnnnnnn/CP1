@@ -121,7 +121,7 @@ if __name__ == "__main__":
                        'go north', 'look', 'pick up', 'lock in', 'go south', 'go south', 'look', 'check', 'keyboard',
                        'go east', 'look', 'buy', '21', 'go north', 'go east', 'submit assignment']
     expected_log = [50, 60, 50, 30, 20, 10, 20, 70, 40, 30, 50]
-    simulation= AdventureGameSimulation('game_data.json', 50, win_walkthrough)
+    simulation = AdventureGameSimulation('game_data.json', 50, win_walkthrough)
     assert expected_log == simulation.get_id_log()
 
     lose_demo = ['go east', 'go west', 'go west', 'go west', 'go north', 'go south', 'go south', 'go east', 'go north',

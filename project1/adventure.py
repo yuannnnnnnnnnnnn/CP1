@@ -36,6 +36,8 @@ class AdventureGame:
     """A text adventure game class storing all location, item and map data.
 
     Instance Attributes:
+        - _locations: a mapping from location id to Location object.
+        - _items: a list of Item objects, representing all items in the game.
         - current_location_id: The ID of the player's current location.
         - ongoing: A boolean indicating whether the game is still in progress (True) or has ended (False).
         - inventory: A list of Item objects that the player has collected.
@@ -223,7 +225,7 @@ class AdventureGame:
         """Displays the current score of the player"""
         print(f"Your current score is: {self.score}")
 
-    def undo_item_action (self) -> None:
+    def undo_item_action(self) -> None:
         """Undo the last command or any action related to the game"""
         self.item_dict = {item.name: item for item in self._items}
         item_name = location.items[0]
@@ -274,7 +276,7 @@ class AdventureGame:
         else:
             return None
 
-    def undo_together(self):
+    def undo_together(self) -> None:
         """..."""
         if self.thisfun():
             self.undo_event()
@@ -287,12 +289,12 @@ class AdventureGame:
 
 
 if __name__ == "__main__":
-    # import python_ta
-    #
-    # python_ta.check_all(config={
-    #     'max-line-length': 120,
-    #     'disable': ['R1705', 'E9998', 'E9999']
-    # })
+    import python_ta
+
+    python_ta.check_all(config={
+        'max-line-length': 120,
+        'disable': ['R1705', 'E9998', 'E9999']
+    })
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 50)  # load data, setting initial location ID to 1
